@@ -1,0 +1,375 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+ <head>
+  <title>Rich Decibels</title>
+  <style type="text/css">
+	body{
+		font-family: helvetica, arial, sans-serif;
+		font-size: 16pt;
+		text-align: center;
+		margin: 0;
+		padding: 0;
+		background: #f6f6f6;
+		color: #3f3f3f;
+	}
+	
+	#everything{
+		width: 750px;
+		margin: 20px auto;
+		padding: 20px;
+		background: white;
+		text-align: left;
+	}
+	
+	h1{
+		font:italic 55px Georgia, "Times New Roman", Times, serif;
+		color:#aaa;
+		margin-top: 10px;
+	}
+	
+	h2 {
+	  font:italic 24px Georgia, "Times New Roman", Times, serif;
+	  color:#aaa;
+	  letter-spacing:-1px;
+	}
+	
+	a{
+		text-decoration: none;
+		font-style: italic;
+		color: black;
+	}
+	
+	a:hover{
+		text-decoration: underline;
+	}
+	
+	iframe{
+		margin: 0;
+		padding:0;
+	}
+	
+	
+	#vid1{float: left;}
+	#vid2{float: right;}
+	
+	.clear{clear: both;}
+	.line{border: 1px solid #f6f6f6}
+  </style> 
+  
+  <style type="text/css">
+	<!--
+	/** 
+	 * Slideshow style rules.
+	 */
+	#slideshow {
+		margin:0 auto;
+		width:750px; /* slide width + 80px (left and right arrow */
+		height:265px;
+		position:relative;
+		border: 1px solid #f6f6f6;
+		border-width: 2px 0;
+		font-size: 90%;
+	}
+	#slideshow #slidesContainer {
+	  margin:0 auto;
+	  width:670px;
+	  height:265px;
+	  overflow:auto; /* allow scrollbar */
+	  position:relative;
+	}
+	#slideshow #slidesContainer .slide {
+	  margin:0 auto;
+	  width:650px; /* reduce by 20 pixels of #slidesContainer to avoid horizontal scroll */
+	  height:265px;
+	}
+
+	/** 
+	 * Slideshow controls style rules.
+	 */
+	.control {
+	  display:block;
+	  width:40px;
+	  height:265px;
+	  text-indent:-10000px;
+	  position:absolute;
+	  cursor: pointer;
+	}
+	#leftControl {
+	  top:0px;
+	  left:0;
+	  background:white url(img/left_arrow.jpg) no-repeat 0 center;
+	}
+	#rightControl {
+	  top:0px;
+	  right:0;
+	  background:white url(img/right_arrow.jpg) no-repeat 0 center;
+	}
+
+	.slideleft{
+	  display: block;
+	  width: 300px;
+	  margin: 15px;
+	  float: left;
+	}	
+	.slide p {
+	  margin: 15px 15px 15px 0;
+	}
+	.slide h2 {
+	  margin-top: 0;
+	}
+	.slide a{
+	  font:italic 100% Georgia, "Times New Roman", Times, serif;
+  	  color:#aaa;
+	  text-decoration: none;
+	}
+	.slide a:hover{
+	  text-decoration: underline;
+	}
+	
+	.slide img {
+	  float:right;
+	  margin: 20px 15px;
+	  width: 300px;
+	  height: 225px;
+	}
+	-->
+	</style>
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript" src="js/jquery.ba-dotimeout.js"></script>
+	<script type="text/javascript">
+	$(document).ready(function(){
+	  var currentPosition = 0;
+	  var slideWidth = 670;
+	  var slides = $('.slide');
+	  var numberOfSlides = slides.length;
+	  var play = true;
+
+	  // Remove scrollbar in JS
+	  $('#slidesContainer').css('overflow', 'hidden');
+
+	  // Wrap all .slides with #slideInner div
+	  slides
+		.wrapAll('<div id="slideInner"></div>')
+		// Float left to display horizontally, readjust .slides width
+		.css({
+		  'float' : 'left',
+		  'width' : slideWidth
+		});
+
+	  // Set #slideInner width equal to total width of all slides
+	  $('#slideInner').css('width', slideWidth * numberOfSlides);
+
+	  // Insert controls in the DOM
+	  $('#slideshow')
+		.prepend('<span class="control" id="leftControl">Clicking moves left</span>')
+		.append('<span class="control" id="rightControl">Clicking moves right</span>');
+	  
+	  //stop autoplay if 'more...' link clicked
+	  $('.more').bind('click', function(){
+		play = false;
+	  });		
+
+	  // Hide left arrow control on first load
+	  manageControls(currentPosition);
+	  	  
+	  // Create event listeners for .controls clicks	  
+	  $('.control')
+		.bind('click', function(){
+		//stop auto play
+		play = false;
+		
+		// Determine new position
+		currentPosition = ($(this).attr('id')=='rightControl') ? currentPosition+1 : currentPosition-1;
+		
+		move();
+	  });
+	  
+	  function move(){
+	  // Hide / show controls
+		manageControls(currentPosition);
+		// Move slideInner using margin-left
+		$('#slideInner').animate({
+		  'marginLeft' : slideWidth*(-currentPosition),
+		  opacity: 0.7
+		}, 900, function() {
+		  $('#slideInner').animate({opacity: 1}, 100);			
+		});
+	  }
+	  
+	// Auto-slide
+	$.doTimeout( 7000, function(){
+		if (play) {
+			if(currentPosition==numberOfSlides-2){play=false;}
+			currentPosition++;
+			move();
+			return true;
+		}
+		else return false;
+	});
+	
+	//keyboard control
+	$('body').keydown(function(){
+		if(event.which == 39){//right arrow
+			play = false;
+			if(currentPosition!=numberOfSlides-1){
+				currentPosition++;
+				move();
+			}			
+		}
+		if(event.which == 37){//left arrow
+			play = false;
+			if(currentPosition != 0){
+				currentPosition--;
+				move();
+			}
+		}
+	});
+	  	 
+
+	  // manageControls: Hides and Shows controls depending on currentPosition
+	  function manageControls(position){
+		// Hide left arrow if position is first slide
+		if(position==0){ $('#leftControl').hide() } else{ $('#leftControl').show() }
+		// Hide right arrow if position is last slide
+		if(position==numberOfSlides-1){ $('#rightControl').hide() } else{ $('#rightControl').show() }
+	  }	
+	});
+	</script>
+
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-20370254-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+
+  </script>
+ </head>
+ <body>
+  <div id="everything">
+   <div id="header">
+    <h1>Introducing... Rich Decibels</h1>
+   </div>
+   <div>
+    <p>Hi I'm Rich, I make electronic musical instruments and noise making gadgets.</p> 
+	<!-- Slideshow HTML -->
+	<div id="slideshow">
+		<div id="slidesContainer">			
+			<div class="slide"><!--Sinister Tone Generator-->
+				<div class="slideleft">
+					<h2>Sinister Tone Generator</h2>
+					<p>The Sinister Tone Generator is a bass drone synth with two pairs of heterodyning oscillators. That means it goes wop-<strong>wop</strong>-wop.</p>
+					<p><a href="http://richdecibels.com/blog/?p=166" class="more">More...</a></p>
+				</div>
+				<img src="img/slideshow/sinister.png" />
+			</div>
+			<div class="slide"><!--Joybox-->
+				<div class="slideleft">
+					<h2>The Joybox</h2>
+					<p>The Joybox is a joystick-controlled Atari Punk Console in a jewellery box.</p>
+					<p>It goes <em>screee</em>-doooo...</p>
+					<p><a href="http://richdecibels.com/blog/?p=147" class="more">More...</a></p>
+				</div>
+				<img src="img/slideshow/joybox.png" />
+			</div>			
+			<div class="slide"><!--Howlin' Gaptooth-->
+				<div class="slideleft">
+					<h2>Howlin' Gaptooth</h2>
+					<p>This battery-powered guitar practice amp is made from laser cut ply. He was designed in collaboration with artist/illustrator <a title="artist, illustrator, super-babe" href="http://kellyspencer.co.nz">Kelly Spencer</a>.</p>
+					<p><a href="http://richdecibels.com/blog/?p=155" class="more">More...</a></p>
+				</div>
+				<img src="img/slideshow/howlin.png" />
+			</div>
+			<div class="slide"><!--Brainwave Disruptor-->
+				<div class="slideleft">
+				<h2>The Brainwave Disruptor</h2>
+					<p>The Brainwave Disruptor is an Arduino-based audio-visual device that 'encourages' your brain to enter states more commonly associated with hallucination or deep meditation.</p>
+					<p><a href="http://richdecibels.com/blog/?p=235" class="more">More...</a></p>
+				</div>
+				<img src="img/slideshow/brainwave.png" />					
+			</div>
+			<!--<div class="slide">
+				<div class="slideleft">
+				<h2>The Kequencer</h2>
+				<p>It's kind of a keyboard and kind of a sequencer: the Kequencer is supremely good at generating out-of-key chiptune melodies.</p>
+				<p><a href="http://richdecibels.com/blog/?p=51" class="more">More...</a></p>
+				</div>
+				<img src="img/slideshow/kequencer.png" />
+			</div>-->
+			<div class="slide"><!--Kequencer 2-->
+				<div class="slideleft">
+					<h2>Kequencer 2.0</h2>
+					<p>It's kind of a keyboard and kind of a sequencer: the Kequencer is supremely good at generating out-of-key chiptune melodies.</p>
+					<p><a href="http://richdecibels.com/blog/?p=119" class="more">More...</a></p>
+				</div>
+				<img src="img/slideshow/kequencer2.png" />
+			</div>
+			<!--<div class="slide">
+				<div class="slideleft">
+					<h2>The Exenterator</h2>
+					<p>Commissioned by experimental vocalist St. Cosmos, this drone synth turns his already rather eviscerating voice into something altogether more terrifying.</p>
+					<p><a href="http://richdecibels.com/blog/?p=254" class="more">More...</a>
+					</p>
+				</div>
+				<img src="img/slideshow/exenterator.png" />
+			</div>-->
+			<div class="slide"><!--Ceiling-->
+				<div class="slideleft">
+					<h2>Cedar Ceiling Speakers</h2>
+					<p>This is one of a pair of ceiling speakers I made from recycled cedar weather-boards.</p>					
+				</div>
+				<img src="img/slideshow/ceiling.png"/>
+			</div>
+			<div class="slide"><!--Chelsea-->
+				<div class="slideleft">
+					<h2>Chelsea amp</h2>
+					<p>This is one of the first things I ever built: a battery-powered guitar practice amp in a golden syrup tin.</p>
+					<p>Based on the <a href="http://www.beavisaudio.com/projects/NoisyCricket/">Noisy Cricket</a>.</p>					
+				</div>
+				<img src="img/slideshow/chelsea.png"/>
+			</div>
+			<div class="slide"><!--Airstream-->
+				<div class="slideleft">
+					<h2>Airstream Amp</h2>
+					<p>The Airstream is a 30W stereo amp built into the shell of a 1960's portable TV.</p>
+				</div>
+				<img src="img/slideshow/airstream.png"/>
+			</div>
+			<div class="slide"><!--Synthbot-->
+				<div class="slideleft">
+					<h2>Synthbot</h2>
+					<p>Synthbot was an exhibition of singing robots created in collaboration with illustrator and rainbow rider <a href="http://lanceravenswood.com/FreeLance/home.html">FreeLance</a>.</p>
+					<p><a href="http://richdecibels.com/exhibition/" class="more">More...</a>
+					</p>
+				</div>
+				<img src="img/slideshow/synthbot.png"/>
+			</div>
+		</div>
+	</div>
+
+	
+	<p><img src="img/bungeye.png" style="float:left; margin-right: 15px" width="300px" height="270px"/>I like to show other humans how to make stuff like this. I run workshop classes where you can learn the basics of electronics and build your very own noise machine. You can <a class="highlight" href="http://richdecibels.com/blog/?cat=6">find more information and make a booking here</a>.</p>
+	
+	<p>Wherever possible I like to give away my designs so other people can copy my work. If you're into that sort of thing, you can find full schematics and plans of the devices shown on <a href="blog">my blog</a>, along with audio and video samples.</p> 
+	<div class="clear"></div>
+	
+	<div class="line"></div>
+
+	<p>This <a href="http://lekrmoi.com">weird Dutch guy</a> made a couple of films about me and my workshops:</p>
+	<iframe id="vid1" src="http://player.vimeo.com/video/29172356?title=0&amp;byline=0&amp;portrait=0" width="365" height="205" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
+	<iframe id="vid2" src="http://player.vimeo.com/video/29819573?title=0&amp;byline=0&amp;portrait=0" width="365" height="205" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
+	<div class="clear">&nbsp;</div>
+
+	<div class="line"></div>
+	
+	<p><a href="http://blog.ponoko.com/category/writers/rich-decibels">I write for Ponoko</a> about DIY electronics and digital fabrication, and I make websites sometimes too. I can make you a clean little page like this one if you like.</p>
+	
+	<p>You can get hold of me on +6421-101-6646 or email <a href="mailto:richdecibels@gmail.com">richdecibels@gmail.com</a>.</p>
+   </div>
+  </div>
+ </body>
+</html>
