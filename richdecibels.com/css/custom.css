@@ -29,26 +29,3 @@ img{
   width: 100%;
   height: 100%;
 }
-
-.color-a{
-  background-color: white;
-}
-
-blockquote{
-  margin-left: 0;
-  margin-right: 0;
-}
-
-blockquote p, p.small-p{
-  font-size: 90%;
-}
-cite{
-  display: block;
-  margin-top: 0.5em;
-  text-align: right;
-}
-.avatar{
-  width: 100px;
-  float: left;
-  margin-right: 1em;
-}

@@ -1,0 +1,295 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+ <HEAD>
+
+<SCRIPT LANGUAGE="JavaScript" TYPE="text/javascript">
+    <!--
+        // Trivial and pointless little JavaScript to interpolate random 
+        // strings into a page.
+    
+    var sc = 104;                    // Number of alternative strings
+    var s = new Array(sc);          // Array to hold alternative strings
+    
+    // String definitions. There should be exactly 'sc' strings, numbered
+    // from 0 to (sc - 1). You can embed markup in the strings, provided
+    // you're careful to escape any double quotes. Note that if you fail
+    // to define enough strings, you'll get 'undefined' appearing in place
+    // of the string, or possibly even a security violation, which tends
+    // to be unaesthetic.
+    
+    s[0] = "From earth, but ages away";
+    s[1] = "Engage Hyperdrive";
+    s[2] = "1 FW, 2 LB, 4 Lattes &amp; a jug of electrons";
+    s[3] = "Fly home robot, fly home";
+    s[4] = "An explosion of time!";
+    s[5] = "Ahhhhh! Save me Synthbot!";
+    s[6] = "Ain't no sunshine when your battery's low";
+    s[7] = "When common pickup lines don't work, try Synthbot!";
+    s[8] = "Used to beep out bad words like poo";
+    s[9] = "He's really cute";
+	s[10] = "She's really cute";
+	s[11] = "I love you";
+	s[12] = "Driven to the brink of sanity";
+	s[13] = "If Celia comes we'll give her one";
+	s[14] = "Eats lightning smoothies with his eyes";
+	s[15] = "Has a mouth but doesn't speak";
+	s[16] = "Speaks but has no mouth";
+	s[17] = "A new lifeform, a robot";
+	s[18] = "A new language, robototic";
+	s[19] = "A blender had sex with a graph";
+	s[20] = "You've got a message";
+	s[21] = "Has a floppy fringe";
+	s[22] = "Is a floppy fridge";
+	s[23] = "Post-apocalyptic panacea";
+	s[24] = "Wants to start a family";
+	s[25] = "Crush all humans. With love.";
+	s[26] = "Was an extra in LOTR";
+	s[27] = "Holding open the door of perception";
+	s[28] = "Stands when a lady enters the room";
+	s[29] = "Keep out of reach of adults";
+	s[30] = "Knows but isn't telling";
+	s[31] = "Microwave &amp; dishwasher safe. That's not true.";
+	s[32] = "Let's go fishing in outer space!";
+	s[33] = "May contain traces of radioactive funk";
+	s[34] = "Combats bullying";
+	s[35] = "Robots are people too";
+	s[36] = "Nine volt love machine";
+	s[37] = "Good-vibe generator";
+	s[38] = "May induce seizures";
+	s[39] = "Take some drugs with one";
+	s[40] = "Brought to you by the future";
+	s[41] = "Drink Slurm!";
+	s[42] = "Hunted for his fur";
+	s[43] = "Misappropriation of company funds";
+	s[44] = "Cannot ride a bicycle";
+	s[45] = "Has feelings too!";
+	s[46] = "Plugs directly into your brain";
+	s[47] = "Might be on Oprah";
+	s[48] = "Use him in the toilet";
+	s[49] = "I dropped it but it's still going";
+	s[50] = "Makes a statement";
+	s[51] = "Synthbot <span style='font-size: 75%'>Synthbot <span style='font-size: 75%'>Synthbot <span style='font-size: 75%'>Synthbot  <span style='font-size: 75%'>Synthbot</span></span></span></span>";
+	s[52] = "Speaks in all caps";
+	s[53] = "Washed up on the beach of consciousness";
+	s[54] = "Transform! Jjjj-jj-jj-zzyp-bdddddt";
+	s[55] = "Triumph of the robot spirit";
+	s[56] = "A symphony of science";
+	s[57] = "Did a crap cover of your favourite song";
+	s[58] = "I take mine everywhere";
+	s[59] = "The coolest thing in town";
+	s[60] = "Extra fins for stability";
+	s[61] = "Now with cup holders!";
+	s[62] = "Electric windows!";
+	s[63] = "Sings in the shower";
+	s[64] = "It's weird, they keep coming";
+	s[65] = "Hot sauce for your ears";
+	s[66] = "It's pretty futuristic";
+	s[67] = "No comprende anglais";
+	s[68] = "Played drums for The Police in '88";
+	s[69] = "Does not compute";
+	s[70] = "You don't get it but someone else will";
+	s[71] = "Sneaked in undetected";
+	s[72] = "He saved every one of us";
+	s[73] = "Ringtone generator";
+	s[74] = "Needs your love";
+	s[75] = "Put down that tree and hug a robot";
+	s[76] = "Fully house trained";
+	s[77] = "Respects your opinion";
+	s[78] = "Will interfere with aircraft instrumentation";
+	s[79] = "Really fast at running";
+	s[79] = "The genius behind Lady Gaga";
+	s[80] = "This tagline cannot be displayed in your country due to copyright violation";
+	s[81] = "Took too many pills in the 90s";
+	s[82] = "Takes ice cream scoops out of your brain";
+	s[83] = "Uses words like 'retard' and 'honky'";
+	s[84] = "Put it in! Don't talk about it!";
+	s[86] = "Fail to prepare, prepare to fail";
+	s[87] = "Your favourite high school teacher";
+	s[88] = "Where the magic happens";
+	s[89] = "A gift from the future";
+	s[90] = "It's a musical robot";
+	s[91] = "He's talking to you";
+	s[92] = "Beep Blip Beeep!!!";
+	s[93] = "We don't know how we made them";
+	s[94] = "And now, Synthbot Advanced!";
+	s[95] = "Jesus has four";
+	s[96] = "No need for food, just good vibes";
+	s[97] = "Powered by yoghurt";
+	s[98] = "Let them be!";
+	s[99] = "Let sleeping bots lie!";
+	s[100] = "Intergalactic emissary of hope";
+	s[101] = "Is very good at maths";
+	s[102] = "Breakdancing robot";
+	s[102] = "Plays well with others";
+	s[102] = "A riddle wrapped in an enigma wrapped in bacon";
+	s[103] = "I don't understand but I know what you mean";
+
+
+
+
+    
+    // pickRandom - Return a random number in a given range. If we're running
+    // on an older browser that doesn't support 'Math.random()', we can fake
+    // it by using the current time. This isn't ideal for mission-critical
+    // security applications, but it's fine here. Note that we divide the
+    // current time by 1000 to get rid of the milliseconds which Navigator
+    // doesn't seem to take into account.
+    
+    function pickRandom(range) {
+        if (Math.random)
+            return Math.round(Math.random() * (range-1));
+        else {
+            var now = new Date();
+            return (now.getTime() / 1000) % range;
+        }
+    }
+    
+    // Write the string into the document. The "<BLOCKQUOTE>" tags are just 
+    // for formatting; you can put as much or as little HTML around these 
+    // strings as you like.
+    
+    var choice = pickRandom(sc);
+   
+   //document.writeln('<p>' + s[choice]); 
+    
+    // --></SCRIPT>
+
+
+  <TITLE> SYNTHBOT - Deluxe Cafe Nov 15-27 </TITLE>
+  <style type="text/css">
+	html, body, div, span, applet, object, iframe,
+	h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+	a, abbr, acronym, address, big, cite, code,
+	del, dfn, em, font, img, ins, kbd, q, s, samp,
+	small, strike, strong, sub, sup, tt, var,
+	b, u, i, center,
+	dl, dt, dd, ol, ul, li,
+	fieldset, form, label, legend,
+	table, caption, tbody, tfoot, thead, tr, th, td {
+		margin: 0;
+		padding: 0;
+		border: 0;
+		outline: 0;
+		font-size: 100%;
+		vertical-align: baseline;
+		background: transparent;
+	}
+	body {
+		line-height: 1;
+	}
+	ol, ul {
+		list-style: none;
+	}
+	blockquote, q {
+		quotes: none;
+	}
+	blockquote:before, blockquote:after,
+	q:before, q:after {
+		content: '';
+		content: none;
+	}
+
+	/* tables still need 'cellspacing="0"' in the markup */
+	table {
+		border-collapse: collapse;
+		border-spacing: 0;
+	}
+
+	body{
+		text-align: center;
+		font: bold 1em helvetica, arial, sans;
+	}
+
+	#content p{
+		margin-top: 1em;
+	}
+
+	#everything{
+		text-align: left;
+		width: 600px;
+		margin: 0 auto;
+	}	
+
+	#header{
+		text-transform: uppercase;
+	}
+
+	#title{
+		font-size: 4em;
+	}
+
+	#tagline{
+		font-size: 2em;
+	}
+
+
+  </style>
+
+
+
+ </HEAD>
+ <BODY>
+  <div id="everything">
+
+   <div id="content">
+   Brought to you by <a href="http://richdecibels.com/blog">RichDecibels.com</a><br />
+      	<img src="http://farm6.static.flickr.com/5024/5854039971_1424275808_b.jpg" />
+<object width="500" height="404"><param name="movie" value="http://www.youtube.com/v/HRzjlFoeo-A?hl=en&fs=1"></param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><embed src="http://www.youtube.com/v/HRzjlFoeo-A?hl=en&fs=1" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="500" height="404"></embed></object>
+
+<p>The synthbots are all sold out now but we are taking orders for custom originals. Contact synthbotnz@gmail.com if you're interested</p>
+
+<p>This is the original bot, it's a 4-stage gated oscillator.</p>
+<object width="500" height="404"><param name="movie" value="http://www.youtube.com/v/Jyh6jjF_4As?hl=en&fs=1"></param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><embed src="http://www.youtube.com/v/Jyh6jjF_4As?hl=en&fs=1" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="500" height="404"></embed></object>
+
+
+<p>This guy is a melody generator.</p>
+<object width="500" height="404"><param name="movie" value="http://www.youtube.com/v/ocTFU87YqeY?hl=en&fs=1"></param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><embed src="http://www.youtube.com/v/ocTFU87YqeY?hl=en&fs=1" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="500" height="404"></embed></object>
+
+
+
+<p>And this bad boy is an 8-step tone sequencer</p>
+<object width="500" height="404"><param name="movie" value="http://www.youtube.com/v/cSons8CZ3Jc?hl=en&fs=1"></param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><embed src="http://www.youtube.com/v/cSons8CZ3Jc?hl=en&fs=1" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="500" height="404"></embed></object>
+
+
+<p>Finally, the little baby bot is a LP filter to add a bit of eurotrash club thump to the mix</p>
+<object width="500" height="404"><param name="movie" value="http://www.youtube.com/v/ood8LQlXLqM?hl=en&fs=1"></param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><embed src="http://www.youtube.com/v/ood8LQlXLqM?hl=en&fs=1" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="500" height="404"></embed></object>
+
+	<img src="http://farm6.static.flickr.com/5120/5854039977_236d1657da.jpg" /><br />
+	<img src="http://farm6.static.flickr.com/5035/5854039985_e4759b4730.jpg" /><br />
+	<img src="http://farm4.static.flickr.com/3137/5854039987_d0399b3c29.jpg" /><br /> 
+	<img src="http://farm4.static.flickr.com/3047/5854039993_fa23559c40.jpg" /><br /> 
+	<img src="http://farm6.static.flickr.com/5184/5854039999_ee450dd91b.jpg" /><br /> 
+	<img src="http://farm3.static.flickr.com/2639/5854596272_0e4e992193.jpg" /><br />
+	<img src="http://farm6.static.flickr.com/5266/5854596278_3809abd128.jpg" /><br /> 
+	<img src="http://farm3.static.flickr.com/2777/5854596288_5480733238.jpg" /><br /> 
+	<img src="http://farm4.static.flickr.com/3121/5854596290_f0c7b2bdea.jpg" /><br />
+	<img src="http://farm3.static.flickr.com/2753/5854596302_f95c76ae84.jpg" /><br /> 
+	<img src="http://farm4.static.flickr.com/3225/5854601916_5958a490dd.jpg" /><br /> 
+	<img src="http://farm6.static.flickr.com/5270/5854045907_8ca37c2f0a.jpg" /><br />
+	<img src="http://farm6.static.flickr.com/5230/5854045911_77a9fc8c4a.jpg" /><br /> 
+	<img src="http://farm6.static.flickr.com/5188/5854045915_166bdc30a6.jpg" /><br />
+	<img src="http://farm6.static.flickr.com/5039/5854045921_ea7428523a.jpg" /><br />
+	<img src="http://farm4.static.flickr.com/3027/5854045927_33dd8490ba.jpg" /><br />
+	<img src="http://farm6.static.flickr.com/5270/5854045939_20ddff921f.jpg" /><br />
+	<img src="http://farm4.static.flickr.com/3262/5854601912_3a0ed60880.jpg" /><br />
+
+<!-- Start of StatCounter Code -->
+<script type="text/javascript">
+var sc_project=6408662; 
+var sc_invisible=1; 
+var sc_security="70d62fa8"; 
+</script>
+
+<script type="text/javascript"
+src="http://www.statcounter.com/counter/counter.js"></script><noscript><div
+class="statcounter"><a title="tumblr hit tracking tool"
+href="http://statcounter.com/tumblr/" target="_blank"><img
+class="statcounter"
+src="http://c.statcounter.com/6408662/0/70d62fa8/1/"
+alt="tumblr hit tracking tool" ></a></div></noscript>
+<!-- End of StatCounter Code -->
+
+   </div>
+  </div>
+ </BODY>
+</HTML>
