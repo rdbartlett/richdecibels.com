@@ -1,0 +1,239 @@
+<html>
+  <head>
+    <link href="nouislider/nouislider.min.css" rel="stylesheet">
+<!-- Todo
+Mobile response
+Screenshot button
+Presets button, e.g. tree, beehive, power poles, nazis
+Line colour + Background
+Size+Ratio instead of Height+Width
+Key bindings e.g. 123456qwerty
+Hide controls
+Move origin node
+Display nodes but not branches
+
+ -->
+    <style>
+      body{
+        margin: 0;
+        font-family: sans-serif;
+        background: #000;
+      }
+      #canvas{
+        height: 100vh;
+        width: 100wh;
+      }
+      #controls {
+        width: 300px;
+        margin: 0 auto;
+        padding: 10px;
+        background: rgba(150,150,150,0.7);
+      }
+      @media (min-width: 500px){
+        #controls {
+          position: absolute;
+          bottom: 0;
+          left: 0;
+        }
+      }
+      .sliders {
+        margin: 5px;
+        display: inline-block;
+        width: 200px;
+        height: 20px;
+      }
+      .sliderLabels{
+        height: 30px;
+        width: 70px;
+        vertical-align: middle;
+        display: inline-block;
+      }
+      .noUi-tooltip{
+        padding: 2px;
+        font-size: 8px;
+      }
+      :focus{
+        outline: none !important;
+      }
+    </style>
+  </head>
+
+<body>
+  <script>
+    (function() {
+      var meta = document.createElement("meta");
+      meta.setAttribute('name','viewport');
+      var content = 'initial-scale=';
+      content += 2 / window.devicePixelRatio;
+      content += ',user-scalable=no';
+      meta.setAttribute('content', content);
+      document.getElementsByTagName('head')[0].appendChild(meta);
+    })();
+  </script>
+
+  <div id='canvasContainer'>
+    <canvas id="canvas"></canvas>
+  </div>
+
+  <div id="controls">
+    <button id="toggleControls">Hide</button>
+
+    <div id="sliderControls">
+      <div class="sliderLabels">Depth</div><div class="sliders" id="depth"></div>
+      <div class="sliderLabels">Angle</div><div class="sliders" id="offset"></div>
+      <div class="sliderLabels">Height</div><div class="sliders" id="height"></div>
+      <div class="sliderLabels">Width</div><div class="sliders" id="width"></div>
+      <div class="sliderLabels">Skew</div><div class="sliders" id="skew"></div>
+      <div class="sliderLabels">Opacity</div><div class="sliders" id="opacity"></div>
+      <button id="presetBtnA">Preset A</button>
+      <button id="presetBtnB">Preset B</button>
+      <button id="presetBtnC">Preset C</button>
+      <button id="presetBtnD">Preset D</button>
+    </div>
+  </div>
+
+  <script src="nouislider/nouislider.min.js"></script>
+
+  <script type="text/javascript">
+    var sliders = document.getElementsByClassName('sliders');
+    noUiSlider.create(sliders["depth"], {
+      start: 5, tooltips: true, step: 1, range: { 'min': 1, 'max': 20 }
+    });
+    noUiSlider.create(sliders["offset"], {
+      start: 25, tooltips: true, step: 1, range: { 'min': 0, 'max': 90 }
+    });
+    noUiSlider.create(sliders["height"], {
+      start: 12, tooltips: true, step: 1, range: { 'min': 0, 'max': 25 }
+    });
+    noUiSlider.create(sliders["width"], {
+      start: 12, tooltips: true, step: 1, range: { 'min': 0, 'max': 25 }
+    });
+    noUiSlider.create(sliders["skew"], {
+      start: 0, tooltips: true, step: 1, range: { 'min': [-90], 'max': [90] }
+    });
+    noUiSlider.create(sliders["opacity"], {
+      start: 1, tooltips: true, range: { 'min': 0, 'max': 1 }
+    });
+
+    for ( var i = 0; i < sliders.length; i++ ) {
+      sliders[i].noUiSlider.on('slide', drawTreeFromSliders);
+    }
+
+    // document.getElementById('resetButton').addEventListener('click', function(){
+    //   for ( var i = 0; i < sliders.length; i++ ) {
+    //     sliders[i].noUiSlider.reset();
+    //     drawTreeFromSliders();
+    //   }
+    // });
+
+    document.getElementById('toggleControls').addEventListener('click', function(){
+      document.getElementById('sliderControls').style.setProperty('display', 'none');
+      document.getElementById('toggleControls').innerHTML = "Show";
+    });
+
+    document.getElementById('presetBtnA').addEventListener('click', function(){
+      sliders["depth"].noUiSlider.set(10);
+      sliders["offset"].noUiSlider.set(14);
+      sliders["height"].noUiSlider.set(9);
+      sliders["width"].noUiSlider.set(9);
+      sliders["skew"].noUiSlider.set(0);
+      sliders["opacity"].noUiSlider.set(0.8);
+      drawTreeFromSliders()
+    });
+
+    document.getElementById('presetBtnB').addEventListener('click', function(){
+      sliders["depth"].noUiSlider.set(14);
+      sliders["offset"].noUiSlider.set(60);
+      sliders["height"].noUiSlider.set(7);
+      sliders["width"].noUiSlider.set(7);
+      sliders["skew"].noUiSlider.set(0);
+      sliders["opacity"].noUiSlider.set(0.3);
+      drawTreeFromSliders()
+    });
+
+    document.getElementById('presetBtnC').addEventListener('click', function(){
+      sliders["depth"].noUiSlider.set(11);
+      sliders["offset"].noUiSlider.set(90);
+      sliders["height"].noUiSlider.set(20);
+      sliders["width"].noUiSlider.set(20);
+      sliders["skew"].noUiSlider.set(90);
+      sliders["opacity"].noUiSlider.set(0.4);
+      drawTreeFromSliders()
+    });
+
+    document.getElementById('presetBtnD').addEventListener('click', function(){
+      sliders["depth"].noUiSlider.set(11);
+      sliders["offset"].noUiSlider.set(30);
+      sliders["height"].noUiSlider.set(9);
+      sliders["width"].noUiSlider.set(9);
+      sliders["skew"].noUiSlider.set(90);
+      sliders["opacity"].noUiSlider.set(0.7);
+      drawTreeFromSliders()
+    });
+
+    function drawTreeFromSliders(){
+      depth = sliders["depth"].noUiSlider.get();
+      offset = Number(sliders["offset"].noUiSlider.get());
+      height = sliders["height"].noUiSlider.get();
+      width = sliders["width"].noUiSlider.get();
+      skew = Number(sliders["skew"].noUiSlider.get());
+      context.globalAlpha = Number(sliders["opacity"].noUiSlider.get());
+      drawNewTree(rootX, rootY, -90, depth);
+    }
+
+  </script>
+
+  <script type="text/javascript">
+
+    var depth = 5;
+    var offset = 25;
+    var height = 12;
+    var width = 12;
+    var skew = 0;
+    var alpha = 1;
+
+    var canvas = document.getElementById('canvas');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    // if(window.innerWidth < 500){ canvas.height = window.innerHeight - 200; }
+
+    var context = canvas.getContext('2d');
+
+    context.fillStyle = 'rgb(255,25,255)';
+    context.strokeStyle = 'rgb(25,255,255)';
+    context.globalAlpha = alpha;
+    context.lineWidth = 1;
+
+    var deg_to_rad = Math.PI / 180.0;
+    var rootX = canvas.width / 2;
+    var rootY = canvas.height;
+
+    function drawLine(x1, y1, x2, y2, brightness){
+      context.moveTo(x1, y1);
+      context.lineTo(x2, y2);
+    }
+
+    function drawTree(x1, y1, angle, depth){
+      if (depth !== 0){
+        var x2 = x1 + (Math.cos(angle * deg_to_rad) * depth * width);
+        var y2 = y1 + (Math.sin(angle * deg_to_rad) * depth * height);
+        drawLine(x1, y1, x2, y2, depth);
+        drawTree(x2, y2, (angle + offset + skew), depth - 1);
+        drawTree(x2, y2, (angle - offset), depth - 1);
+      }
+    }
+
+    function drawNewTree(x1, y1, angle, depth){
+      context.clearRect(0, 0, canvas.width, canvas.height);
+      context.beginPath();
+      drawTree(x1, y1, angle, depth);
+      context.closePath();
+      context.stroke();
+    }
+
+    drawNewTree(rootX, rootY, -90, depth);
+
+  </script>
+
+  </body>
+</html>

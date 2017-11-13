@@ -48,7 +48,10 @@ cite{
   text-align: right;
 }
 .avatar{
-  width: 100px;
+  width: 120px;
   float: left;
   margin-right: 1em;
+  border-radius: 120px;
 }
+
+ul.upcoming{list-style: none;}
