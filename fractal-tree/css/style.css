@@ -1,0 +1,81 @@
+body{
+  margin: 0;
+  font-family: sans-serif;
+  background: #000;
+}
+#canvas{
+  height: 100vh;
+  width: 100wh;
+}
+#controls {
+  width: 300px;
+  margin: 0 auto;
+  padding: 10px;
+  background: rgba(150,150,150,0.7);
+}
+@media (min-width: 500px){
+  #controls {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+  }
+}
+.sliders {
+  margin: 5px;
+  display: inline-block;
+  width: 200px;
+  height: 20px;
+}
+.sliderLabels{
+  height: 30px;
+  width: 70px;
+  vertical-align: middle;
+  display: inline-block;
+}
+.noUi-tooltip{
+  padding: 2px;
+  font-size: 8px;
+}
+:focus{
+  outline: none !important;
+}
+
+
+#colorControls {}
+
+#lineColor{
+  height: 50px;
+  width: 50px;
+  line-height: 40px;
+}
+#color-input {
+  display: none;
+}
+#color-label {
+  margin-left: 15px;
+  position: absolute;
+  left: 70px;
+  height: 30px;
+  width: 30px;
+}
+#color-input:checked ~ #color-picker {
+  opacity: 0;
+  z-index: 0;
+  pointer-events:none;
+
+}
+#color-picker {
+  position: relative;
+  left: 70px;
+  background-color: white;
+  height: 150px;
+  width: 185px;
+  border: solid 1px #ccc;
+  opacity: 1;
+  padding: 5px;
+  z-index: 100;
+}
+
+canvas:hover {
+  cursor: crosshair;
+}
