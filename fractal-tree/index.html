@@ -9,7 +9,6 @@
 * Display nodes but not branches
 * Add screenshot button (or upload to imgur button)
 * different input modes: e.g. text input, or imogen's gloves
-* Keyboard shortcuts to control params
 * Different numbers of branches at different depths, e.g. 1, 2, 3, 5, 8
 * Modify relationship between recursive depth and branch length
 * Add animation mode, e.g. for each param, set a range and a rate of change
@@ -40,7 +39,8 @@
   </div>
 
   <div id="controls">
-    <button id="toggleControls">Hide</button>
+    <button id="keybindings">Keyboard shortcuts</button>
+    <button id="toggleControls">Hide controls</button>
     <div id="controlsWrapper">
 
       <div id="sliderControls">
@@ -151,6 +151,11 @@
     , {repeats: 6, depth: 14, offset: 60, size: 20, skew: 0, opacity: 0.13}
     , {repeats: 5, depth: 9, offset: 180, size: 20, skew: -60, opacity: 0.25}
     ];
+
+    document.getElementById('keybindings').addEventListener('click', function(){
+      alert("Keybindings:\nPress 1-4 keys for presets.\nMove slider 1 with Q+A, slider 2 with W+A, etc.");
+    });
+
 
 
     function loadPreset(index){
