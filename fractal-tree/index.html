@@ -48,7 +48,6 @@
         <div class="sliderLabels">Depth</div><div class="sliders" id="depth"></div>
         <div class="sliderLabels">Angle</div><div class="sliders" id="offset"></div>
         <div class="sliderLabels">Size</div><div class="sliders" id="size"></div>
-        <div class="sliderLabels">Ratio</div><div class="sliders" id="ratio"></div>
         <div class="sliderLabels">Skew</div><div class="sliders" id="skew"></div>
         <div class="sliderLabels">Opacity</div><div class="sliders" id="opacity"></div>
       </div>
@@ -103,9 +102,6 @@
     noUiSlider.create(sliders["size"], {
       start: 12, tooltips: true, step: 1, range: { 'min': 0, 'max': 25 }
     });
-    noUiSlider.create(sliders["ratio"], {
-      start: 1, tooltips: true, step: 0.1, range: { 'min': 0, 'max': 2 }
-    });
     noUiSlider.create(sliders["skew"], {
       start: 0, tooltips: true, step: 1, range: { 'min': [-90], 'max': [90] }
     });
@@ -119,21 +115,23 @@
 
     // INIT KEYBINDINGS
 
-    Mousetrap.bind('1', function() { incSlider(0); });
-    Mousetrap.bind('2', function() { incSlider(1); });
-    Mousetrap.bind('3', function() { incSlider(2); });
-    Mousetrap.bind('4', function() { incSlider(3); });
-    Mousetrap.bind('5', function() { incSlider(4); });
-    Mousetrap.bind('6', function() { incSlider(5); });
-    Mousetrap.bind('7', function() { incSlider(6); });
-    Mousetrap.bind('q', function() { decSlider(0); });
-    Mousetrap.bind('w', function() { decSlider(1); });
-    Mousetrap.bind('e', function() { decSlider(2); });
-    Mousetrap.bind('r', function() { decSlider(3); });
-    Mousetrap.bind('t', function() { decSlider(4); });
-    Mousetrap.bind('y', function() { decSlider(5); });
-    Mousetrap.bind('u', function() { decSlider(6); });
+    Mousetrap.bind('q', function() { incSlider(0); });
+    Mousetrap.bind('w', function() { incSlider(1); });
+    Mousetrap.bind('e', function() { incSlider(2); });
+    Mousetrap.bind('r', function() { incSlider(3); });
+    Mousetrap.bind('t', function() { incSlider(4); });
+    Mousetrap.bind('y', function() { incSlider(5); });
+    Mousetrap.bind('a', function() { decSlider(0); });
+    Mousetrap.bind('s', function() { decSlider(1); });
+    Mousetrap.bind('d', function() { decSlider(2); });
+    Mousetrap.bind('f', function() { decSlider(3); });
+    Mousetrap.bind('g', function() { decSlider(4); });
+    Mousetrap.bind('h', function() { decSlider(5); });
 
+    Mousetrap.bind('1', function() { loadPreset(0); });
+    Mousetrap.bind('2', function() { loadPreset(1); });
+    Mousetrap.bind('3', function() { loadPreset(2); });
+    Mousetrap.bind('4', function() { loadPreset(3); });
 
     function incSlider(index){
       console.log('inc. index:' + index)
@@ -144,6 +142,25 @@
     function decSlider(index){
       console.log('dec. index:' + index)
       sliders[index].noUiSlider.set(Number(sliders[index].noUiSlider.get()) - sliders[index].noUiSlider.options.step);
+      drawTreeFromSliders()
+    }
+
+    var preset = [
+      {repeats: 1, depth: 10, offset: 14, size: 6, skew: 7, opacity: 1}
+    , {repeats: 2, depth: 9, offset: 44, size: 6, skew: -26, opacity: 1}
+    , {repeats: 6, depth: 14, offset: 60, size: 20, skew: 0, opacity: 0.13}
+    , {repeats: 5, depth: 9, offset: 180, size: 20, skew: -60, opacity: 0.25}
+    ];
+
+
+    function loadPreset(index){
+      sliders["repeats"].noUiSlider.set(preset[index].repeats);
+      sliders["depth"].noUiSlider.set(preset[index].depth);
+      sliders["offset"].noUiSlider.set(preset[index].offset);
+      sliders["size"].noUiSlider.set(preset[index].size);
+      sliders["skew"].noUiSlider.set(preset[index].skew);
+      sliders["opacity"].noUiSlider.set(preset[index].opacity);
+
       drawTreeFromSliders()
     }
 
@@ -163,43 +180,19 @@
     });
 
     document.getElementById('presetBtnA').addEventListener('click', function(){
-      sliders["depth"].noUiSlider.set(10);
-      sliders["offset"].noUiSlider.set(14);
-      sliders["size"].noUiSlider.set(9);
-      sliders["ratio"].noUiSlider.set(1.3);
-      sliders["skew"].noUiSlider.set(0);
-      sliders["opacity"].noUiSlider.set(0.8);
-      drawTreeFromSliders()
+      loadPreset(0)
     });
 
     document.getElementById('presetBtnB').addEventListener('click', function(){
-      sliders["depth"].noUiSlider.set(14);
-      sliders["offset"].noUiSlider.set(60);
-      sliders["size"].noUiSlider.set(7);
-      sliders["ratio"].noUiSlider.set(1);
-      sliders["skew"].noUiSlider.set(0);
-      sliders["opacity"].noUiSlider.set(0.3);
-      drawTreeFromSliders()
+      loadPreset(1)
     });
 
     document.getElementById('presetBtnC').addEventListener('click', function(){
-      sliders["depth"].noUiSlider.set(11);
-      sliders["offset"].noUiSlider.set(90);
-      sliders["size"].noUiSlider.set(20);
-      sliders["ratio"].noUiSlider.set(1);
-      sliders["skew"].noUiSlider.set(90);
-      sliders["opacity"].noUiSlider.set(0.4);
-      drawTreeFromSliders()
+      loadPreset(2)
     });
 
     document.getElementById('presetBtnD').addEventListener('click', function(){
-      sliders["depth"].noUiSlider.set(11);
-      sliders["offset"].noUiSlider.set(30);
-      sliders["size"].noUiSlider.set(9);
-      sliders["ratio"].noUiSlider.set(1);
-      sliders["skew"].noUiSlider.set(90);
-      sliders["opacity"].noUiSlider.set(0.7);
-      drawTreeFromSliders()
+      loadPreset(4)
     });
 
     function drawTreeFromSliders(){
@@ -207,9 +200,7 @@
       depth = sliders["depth"].noUiSlider.get();
       offset = Number(sliders["offset"].noUiSlider.get());
       size = sliders["size"].noUiSlider.get();
-      ratio = sliders["ratio"].noUiSlider.get();
-      height = size;
-      width = height * ratio;
+      height = width = size;
       skew = Number(sliders["skew"].noUiSlider.get());
       context.globalAlpha = Number(sliders["opacity"].noUiSlider.get());
       context.strokeStyle = rgbaColor;
