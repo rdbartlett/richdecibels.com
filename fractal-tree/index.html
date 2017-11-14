@@ -83,8 +83,13 @@
   <script src="nouislider/nouislider.min.js"></script>
 
   <script src="js/color-picker.js"></script>
+  <script src="js/mousetrap.min.js"></script>
+
 
   <script type="text/javascript">
+
+    //  INIT SLIDERS
+
     var sliders = document.getElementsByClassName('sliders');
     noUiSlider.create(sliders["repeats"], {
       start: 6, tooltips: true, step: 1, range: { 'min': 1, 'max': 12 }
@@ -105,11 +110,41 @@
       start: 0, tooltips: true, step: 1, range: { 'min': [-90], 'max': [90] }
     });
     noUiSlider.create(sliders["opacity"], {
-      start: 1, tooltips: true, range: { 'min': 0, 'max': 1 }
+      start: 1, tooltips: true, step: 0.025, range: { 'min': 0, 'max': 1 }
     });
 
     for ( var i = 0; i < sliders.length; i++ ) {
       sliders[i].noUiSlider.on('slide', drawTreeFromSliders);
+    }
+
+    // INIT KEYBINDINGS
+
+    Mousetrap.bind('1', function() { incSlider(0); });
+    Mousetrap.bind('2', function() { incSlider(1); });
+    Mousetrap.bind('3', function() { incSlider(2); });
+    Mousetrap.bind('4', function() { incSlider(3); });
+    Mousetrap.bind('5', function() { incSlider(4); });
+    Mousetrap.bind('6', function() { incSlider(5); });
+    Mousetrap.bind('7', function() { incSlider(6); });
+    Mousetrap.bind('q', function() { decSlider(0); });
+    Mousetrap.bind('w', function() { decSlider(1); });
+    Mousetrap.bind('e', function() { decSlider(2); });
+    Mousetrap.bind('r', function() { decSlider(3); });
+    Mousetrap.bind('t', function() { decSlider(4); });
+    Mousetrap.bind('y', function() { decSlider(5); });
+    Mousetrap.bind('u', function() { decSlider(6); });
+
+
+    function incSlider(index){
+      console.log('inc. index:' + index)
+      sliders[index].noUiSlider.set(Number(sliders[index].noUiSlider.get()) + sliders[index].noUiSlider.options.step);
+      drawTreeFromSliders()
+    }
+
+    function decSlider(index){
+      console.log('dec. index:' + index)
+      sliders[index].noUiSlider.set(Number(sliders[index].noUiSlider.get()) - sliders[index].noUiSlider.options.step);
+      drawTreeFromSliders()
     }
 
     var toggle = true;
