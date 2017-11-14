@@ -8,11 +8,6 @@ var ctx2 = colorStrip.getContext('2d');
 var width2 = colorStrip.width;
 var height2 = colorStrip.height;
 
-var alphaStrip = document.getElementById('alpha-strip');
-var ctx3 = alphaStrip.getContext('2d');
-var width2 = alphaStrip.width;
-var height2 = alphaStrip.height;
-
 var colorLabel = document.getElementById('color-label');
 
 var x = 0;
