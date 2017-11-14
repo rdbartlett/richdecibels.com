@@ -40,7 +40,7 @@ body{
   outline: none !important;
 }
 
-
+/*
 #colorControls {}
 
 #lineColor{
@@ -78,4 +78,25 @@ body{
 
 canvas:hover {
   cursor: crosshair;
+}*/
+
+#lineColor{
+  position: relative;
+  padding: 5px 0;
+}
+.color-input {
+  position: absolute;
+  top: 0;
+  left: 75px;
+  height: 20px;
+  width: 20px;
+  background: white;
+}
+.color-picker {
+  position: absolute;
+  top: 0;
+  height: 150px;
+  width: 185px;
+  border: solid 1px #ccc;
+  padding: 5px;
 }

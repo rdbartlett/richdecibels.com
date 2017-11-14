@@ -44,9 +44,8 @@
     <div id="colorControls">
       <div id="lineColor">
         Line
-        <label for="color-input" id="color-label" style="background-color: rgb(255,255,0)"></label>
-        <input type="checkbox" id="color-input" checked></input>
-        <div id="color-picker">
+        <div class="color-input"></div>
+        <div class="color-picker">
           <canvas id="color-block" height="150" width="150"></canvas>
           <canvas id="color-strip" height="150" width="30"></canvas>
         </div>
@@ -70,7 +69,8 @@
   </div>
 
   <script src="nouislider/nouislider.min.js"></script>
-  <script  src="color-picker/js/color-picker.js"></script>
+
+  <script src="js/new-color-picker.js"></script>
 
   <script type="text/javascript">
     var sliders = document.getElementsByClassName('sliders');
@@ -191,7 +191,7 @@
     var context = canvas.getContext('2d');
 
     // context.fillStyle = 'rgb(255,25,255)';
-    context.strokeStyle = 'rgb(255,255,0)';
+    context.strokeStyle = 'rgba(255,255,255,1)';
     context.globalAlpha = alpha;
     context.lineWidth = 1;
 
