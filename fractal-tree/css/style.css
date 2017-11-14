@@ -80,9 +80,19 @@ canvas:hover {
   cursor: crosshair;
 }*/
 
-#lineColor{
+#colorControls{
   position: relative;
-  padding: 5px 0;
+  height: 40px;
+}
+#lineColor{
+  position: absolute;
+  left: 0px;
+  top: 10px;
+}
+#groundColor{
+  position: absolute;
+  left: 110px;
+  top: 10px;
 }
 .color-input {
   position: absolute;
@@ -91,12 +101,27 @@ canvas:hover {
   height: 20px;
   width: 20px;
   background: white;
+  z-index: 10;
+}
+#color-input-2{
+  background: black;
 }
 .color-picker {
   position: absolute;
-  top: 0;
+  bottom: 0;
+  left: 100px;
   height: 150px;
   width: 185px;
   border: solid 1px #ccc;
   padding: 5px;
+  display: none;
+  background: white;
+  z-index: 11;
+}
+#input-mask{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 9;
+  display: none;
 }

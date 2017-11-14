@@ -21,7 +21,7 @@
 
   </head>
 
-<body>
+<body id="body">
   <script>
     (function() {
       var meta = document.createElement("meta");
@@ -33,6 +33,7 @@
       document.getElementsByTagName('head')[0].appendChild(meta);
     })();
   </script>
+  <div id="input-mask"></div>
 
   <div id='canvasContainer'>
     <canvas id="canvas"></canvas>
@@ -40,32 +41,43 @@
 
   <div id="controls">
     <button id="toggleControls">Hide</button>
+    <div id="controlsWrapper">
 
-    <div id="colorControls">
-      <div id="lineColor">
-        Line
-        <div class="color-input"></div>
-        <div class="color-picker">
-          <canvas id="color-block" height="150" width="150"></canvas>
-          <canvas id="color-strip" height="150" width="30"></canvas>
+      <div id="sliderControls">
+        <div class="sliderLabels">Repeats</div><div class="sliders" id="repeats"></div>
+        <div class="sliderLabels">Depth</div><div class="sliders" id="depth"></div>
+        <div class="sliderLabels">Angle</div><div class="sliders" id="offset"></div>
+        <div class="sliderLabels">Size</div><div class="sliders" id="size"></div>
+        <div class="sliderLabels">Ratio</div><div class="sliders" id="ratio"></div>
+        <div class="sliderLabels">Skew</div><div class="sliders" id="skew"></div>
+        <div class="sliderLabels">Opacity</div><div class="sliders" id="opacity"></div>
+      </div>
+
+      <div id="colorControls">
+        <div id="lineColor">
+          Line
+          <div class="color-input" id="color-input-1"></div>
+          <div class="color-picker" id="color-picker-1">
+            <canvas class="color-block" id="color-block-1" height="150" width="150"></canvas>
+            <canvas class="color-strip" id="color-strip-1" height="150" width="30"></canvas>
+          </div>
+        </div>
+        <div id="groundColor">
+          Ground
+          <div class="color-input" id="color-input-2"></div>
+          <div class="color-picker" id="color-picker-2">
+            <canvas class="color-block" id="color-block-2" height="150" width="150"></canvas>
+            <canvas class="color-strip" id="color-strip-2" height="150" width="30"></canvas>
+          </div>
         </div>
       </div>
+      <div id="buttonControls">
+        <button id="presetBtnA">Preset A</button>
+        <button id="presetBtnB">Preset B</button>
+        <button id="presetBtnC">Preset C</button>
+        <button id="presetBtnD">Preset D</button>
+      </div>
     </div>
-
-    <div id="sliderControls">
-      <div class="sliderLabels">Repeats</div><div class="sliders" id="repeats"></div>
-      <div class="sliderLabels">Depth</div><div class="sliders" id="depth"></div>
-      <div class="sliderLabels">Angle</div><div class="sliders" id="offset"></div>
-      <div class="sliderLabels">Size</div><div class="sliders" id="size"></div>
-      <div class="sliderLabels">Ratio</div><div class="sliders" id="ratio"></div>
-      <div class="sliderLabels">Skew</div><div class="sliders" id="skew"></div>
-      <div class="sliderLabels">Opacity</div><div class="sliders" id="opacity"></div>
-      <button id="presetBtnA">Preset A</button>
-      <button id="presetBtnB">Preset B</button>
-      <button id="presetBtnC">Preset C</button>
-      <button id="presetBtnD">Preset D</button>
-    </div>
-
   </div>
 
   <script src="nouislider/nouislider.min.js"></script>
@@ -81,7 +93,7 @@
       start: 5, tooltips: true, step: 1, range: { 'min': 1, 'max': 20 }
     });
     noUiSlider.create(sliders["offset"], {
-      start: 25, tooltips: true, step: 1, range: { 'min': 0, 'max': 90 }
+      start: 25, tooltips: true, step: 1, range: { 'min': 0, 'max': 180 }
     });
     noUiSlider.create(sliders["size"], {
       start: 12, tooltips: true, step: 1, range: { 'min': 0, 'max': 25 }
@@ -104,14 +116,12 @@
 
     document.getElementById('toggleControls').addEventListener('click', function(){
       if(toggle){
-        document.getElementById('colorControls').style.setProperty('display', 'none');
-        document.getElementById('sliderControls').style.setProperty('display', 'none');
+        document.getElementById('controlsWrapper').style.setProperty('display', 'none');
         document.getElementById('toggleControls').innerHTML = "Show";
         toggle = false;
       }
       else{
-        document.getElementById('colorControls').style.setProperty('display', 'block');
-        document.getElementById('sliderControls').style.setProperty('display', 'block');
+        document.getElementById('controlsWrapper').style.setProperty('display', 'block');
         document.getElementById('toggleControls').innerHTML = "Hide";
         toggle = true;
       }
