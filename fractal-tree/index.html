@@ -5,9 +5,9 @@
 
 <!-- Todo
 * Refactor code
-* Control number of axes of symmetry
 * Add screenshot button (or upload to imgur button)
 * Line colour + Background: need better colour picker ui, including opacity
+* different input modes: e.g. text input, or imogen's gloves
 * Keyboard shortcuts to control params
 * Display nodes but not branches
 * Different numbers of branches at different depths, e.g. 1, 2, 3, 5, 8
@@ -54,6 +54,7 @@
     </div>
 
     <div id="sliderControls">
+      <div class="sliderLabels">Repeats</div><div class="sliders" id="repeats"></div>
       <div class="sliderLabels">Depth</div><div class="sliders" id="depth"></div>
       <div class="sliderLabels">Angle</div><div class="sliders" id="offset"></div>
       <div class="sliderLabels">Size</div><div class="sliders" id="size"></div>
@@ -73,6 +74,9 @@
 
   <script type="text/javascript">
     var sliders = document.getElementsByClassName('sliders');
+    noUiSlider.create(sliders["repeats"], {
+      start: 6, tooltips: true, step: 1, range: { 'min': 1, 'max': 12 }
+    });
     noUiSlider.create(sliders["depth"], {
       start: 5, tooltips: true, step: 1, range: { 'min': 1, 'max': 20 }
     });
@@ -154,6 +158,7 @@
     });
 
     function drawTreeFromSliders(){
+      repeats = Number(sliders["repeats"].noUiSlider.get());
       depth = sliders["depth"].noUiSlider.get();
       offset = Number(sliders["offset"].noUiSlider.get());
       size = sliders["size"].noUiSlider.get();
@@ -170,6 +175,7 @@
 
   <script type="text/javascript">
 
+    var repeats = 6;
     var depth = 5;
     var offset = 25;
     var height = 12;
@@ -198,63 +204,22 @@
       context.lineTo(x2, y2);
     }
 
-    function drawTree1(x1, y1, angle, depth){
-      if (depth !== 0){
-        var x2 = x1 + (Math.cos(angle * deg_to_rad) * depth * width);
-        var y2 = y1 + (Math.sin(angle * deg_to_rad) * depth * height);
-        drawLine(x1, y1, x2, y2, depth);
-        drawTree1(x2, y2, (angle + offset + skew), depth - 1);
-        drawTree1(x2, y2, (angle - offset), depth - 1);
+    function drawReflectedTrees(x1, y1, angle, depth){
+      while (repeats - treeIteration !== 0) {
+        // console.log("repeats: " + repeats + " treeIteration:" + treeIteration)
+        drawTree(x1, y1, angle, depth);
+        treeIteration++;
       }
     }
 
-    function drawTree2(x1, y1, angle, depth){
+    function drawTree(x1, y1, angle, depth){
+      var mirrorAngle = treeIteration/repeats * (2 * Math.PI)
       if (depth !== 0){
-        var x2 = x1 + (Math.cos(angle * deg_to_rad + (1/3)*(Math.PI)) * depth * width);
-        var y2 = y1 + (Math.sin(angle * deg_to_rad + (1/3)*(Math.PI)) * depth * height);
+        var x2 = x1 + (Math.cos(angle * deg_to_rad + mirrorAngle) * depth * width);
+        var y2 = y1 + (Math.sin(angle * deg_to_rad + mirrorAngle) * depth * height);
         drawLine(x1, y1, x2, y2, depth);
-        drawTree2(x2, y2, (angle + offset + skew), depth - 1);
-        drawTree2(x2, y2, (angle - offset), depth - 1);
-      }
-    }
-
-    function drawTree3(x1, y1, angle, depth){
-      if (depth !== 0){
-        var x2 = x1 + (Math.cos(angle * deg_to_rad + (2/3)*(Math.PI)) * depth * width);
-        var y2 = y1 + (Math.sin(angle * deg_to_rad + (2/3)*(Math.PI)) * depth * height);
-        drawLine(x1, y1, x2, y2, depth);
-        drawTree3(x2, y2, (angle + offset + skew), depth - 1);
-        drawTree3(x2, y2, (angle - offset), depth - 1);
-      }
-    }
-
-    function drawTree4(x1, y1, angle, depth){
-      if (depth !== 0){
-        var x2 = x1 + (Math.cos(angle * deg_to_rad + (3/3)*(Math.PI)) * depth * width);
-        var y2 = y1 + (Math.sin(angle * deg_to_rad + (3/3)*(Math.PI)) * depth * height);
-        drawLine(x1, y1, x2, y2, depth);
-        drawTree4(x2, y2, (angle + offset + skew), depth - 1);
-        drawTree4(x2, y2, (angle - offset), depth - 1);
-      }
-    }
-
-    function drawTree5(x1, y1, angle, depth){
-      if (depth !== 0){
-        var x2 = x1 + (Math.cos(angle * deg_to_rad + (4/3)*(Math.PI)) * depth * width);
-        var y2 = y1 + (Math.sin(angle * deg_to_rad + (4/3)*(Math.PI)) * depth * height);
-        drawLine(x1, y1, x2, y2, depth);
-        drawTree5(x2, y2, (angle + offset + skew), depth - 1);
-        drawTree5(x2, y2, (angle - offset), depth - 1);
-      }
-    }
-
-    function drawTree6(x1, y1, angle, depth){
-      if (depth !== 0){
-        var x2 = x1 + (Math.cos(angle * deg_to_rad + (5/3)*(Math.PI)) * depth * width);
-        var y2 = y1 + (Math.sin(angle * deg_to_rad + (5/3)*(Math.PI)) * depth * height);
-        drawLine(x1, y1, x2, y2, depth);
-        drawTree6(x2, y2, (angle + offset + skew), depth - 1);
-        drawTree6(x2, y2, (angle - offset), depth - 1);
+        drawTree(x2, y2, (angle + offset + skew), depth - 1);
+        drawTree(x2, y2, (angle - offset), depth - 1);
       }
     }
 
@@ -262,12 +227,8 @@
     function drawNewTree(x1, y1, angle, depth){
       context.clearRect(0, 0, canvas.width, canvas.height);
       context.beginPath();
-      drawTree1(x1, y1, angle, depth);
-      drawTree2(x1, y1, angle, depth);
-      drawTree3(x1, y1, angle, depth);
-      drawTree4(x1, y1, angle, depth);
-      drawTree5(x1, y1, angle, depth);
-      drawTree6(x1, y1, angle, depth);
+      treeIteration = 0;
+      drawReflectedTrees(x1, y1, angle, depth);
       context.closePath();
       context.stroke();
     }
