@@ -12,6 +12,12 @@ p.padded{
   list-style: none;
 }
 
+.event-list{
+  background: #f1f1f1;
+  padding: 1em;
+  font-size: 90%;
+}
+
 img{
   border-radius: 15px;
 }
@@ -45,13 +51,16 @@ blockquote p, p.small-p{
 cite{
   display: block;
   margin-top: 0.5em;
-  text-align: right;
 }
 .avatar{
   width: 120px;
   float: left;
   margin-right: 1em;
   border-radius: 120px;
+}
+.avatar.right{
+  float: right;
+  margin-left: 1em;
 }
 
 ul.upcoming{list-style: none;}
