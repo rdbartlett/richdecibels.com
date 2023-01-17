@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta property="og:title" content="Music theory: what if it were easy?">
+    <meta property="og:description" content="An interactive explainer to make music theory as simple as possible.">
+    <meta property="og:image" content="http://richdecibels.com/music/images/guitar%20lengths.png">
+    <meta property="og:url" content="http://richdecibels.com/music/">
+    <meta name="twitter:title" content="Music theory: what if it were easy? ">
+    <meta name="twitter:description" content="An interactive explainer to make music theory as simple as possible.">
+    <meta name="twitter:image" content=" http://richdecibels.com/music/images/guitar%20lengths.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="description" content="An interactive explainer to make music theory as simple as possible.">
+    <meta name="keywords" content="music,guitar,">
+    <meta name="author" content="Richard D. Bartlett">
+
+    <title>Music theory: what if it were easy?</title>
+
+<!-- TODO
+
+colour the root on the modes
+visualise the melody generator, and preload the images so it is in sync
+finish explaining modes
+note names
+explain frequency ratios of intervals
+-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.7.52/Tone.js" integrity="sha512-IfuMOipT0Lmz/90cqRmceryNu+jH2m3wNE+KI44KBk/LPX3+OceXQ0oA3ZSMP+VZd7K0jterp2/8t70z7Ap2kg==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css" integrity="sha512-NmLkDIU1C/C88wi324HBc+S2kLhi08PN5GDeUVVVC/BVt/9Izdsc9SVeVfA1UZbY3sHUlDSyRXhCzHfr6hmPPw==" crossorigin="anonymous" />
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-lazyload/17.1.2/lazyload.min.js" integrity="sha512-V3DZ9ZAJrv8ZYY5Zarlfjusec9J6S8htRT3bJDKTdEgq0g9OhbHQUjK+vsBkE6CH0J5VJtBCzPSXJ0ZCVpjPdQ==" crossorigin="anonymous"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/5.4.5/js/swiper.min.js" integrity="sha512-VHsNaV1C4XbgKSc2O0rZDmkUOhMKPg/rIi8abX9qTaVDzVJnrDGHFnLnCnuPmZ3cNi1nQJm+fzJtBbZU9yRCww==" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/5.4.5/css/swiper.min.css" integrity="sha512-uCQmAoax6aJTxC03VlH0uCEtE0iLi83TW1Qh6VezEZ5Y17rTrIE+8irz4H4ehM7Fbfbm8rb30OkxVkuwhXxrRg==" crossorigin="anonymous" />
+
+    <link rel="stylesheet" type="text/css" href = "css/style.css" />
+
+  </head>
+  <body>
+
+  <!-- Slider main container -->
+  <div class="swiper-container">
+      <div class="swiper-buttons">
+        <div class="swiper-button-prev">&lt; Previous page</div>
+        <div class="swiper-button-next">Next page &gt;</div>
+      </div>
+    <div class="swiper-wrapper">
+      <!-- Slides -->
+      <div class="swiper-slide" data-hash="intro">
+        <h1>Music theory: what if it were easy?</h1>
+        <p><em>An interactive story by <a href="http://richdecibels.com">Richard D. Bartlett</a></em></p>
+        <!-- TODO nice cover image & og meta tags -->
+        <p>I recently picked up a guitar for the first time in a couple of years. I used to be a pretty decent player, but I&rsquo;m a self-taught amateur with almost no understanding of formal music theory. As I&rsquo;m starting again, I decided this would be my opportunity to learn &ldquo;the proper way&rdquo;.</p>
+        <p>I did a bunch of research into music theory, trying to understand scales and chords and intervals and all these things. I found it so frustrating! My frustration had a specific flavour, not &ldquo;this is hard to learn because it is a complicated topic&rdquo;, but &ldquo;this is hard to learn because it is being taught in a way that doesn&rsquo;t suit my brain&rdquo;.</p>
+        <p>So in this interactive explainer, I am testing out a way of thinking about music, that suits my brain better than all the other explanations I&rsquo;ve found. As I&rsquo;m building out the explainer, I am learning heaps and having lots of fun.</p>
+        <p><em><strong>Feedback wanted:</strong> I would love to know if this is useful for you! Please read through page by page, and click on the interactive widgets to hear the different musical concepts I introduce in each section. You can leave feedback at the bottom of the screen. I want to know what is clear, what could be simplified more, what did I get wrong, and what do you want to hear more about.</em></p>
+      </div>
+
+      <div class="swiper-slide" data-hash="pitch-is-frequency">
+        <h1>Pitch is frequency</h1>
+        <p>Most people find it easy to spot the difference between a very low rumbly bass sound and a very high squeaky soprano. Those different <strong>pitches</strong> are produced by different <strong>frequencies</strong>. When you hear a low sound, your eardrums are vibrating at a lower frequency than when you hear a high-pitched sound.</p>
+        <p>The frequency is measured in cycles-per-second, or Hertz (Hz). If I pluck the lowest string on a guitar, it will oscillate at 82Hz, physically wobbling back and forth 82 times in a second. If I pluck the highest string it will wobble at about 330Hz. That faster vibration is what we interpret as a high pitch.</p>
+
+        <h2>Music is made by avoiding most of the pitches</h2>
+        <p>In general, our ears can pick up on the range of frequencies between 20Hz and 20,000Hz.</p>
+        <p>We find most combinations of pitches ugly, but a few of them sound beautiful (probably because we&rsquo;re wired to find beauty in math). To construct a musical system, the first job is to remove almost all of the possible pitches and create a small set that can be recombined in ways that sound good to us. Each pitch within the set is called a <strong>note</strong>.</p>
+        <p>Lemme explain how we created the set of notes we use in most Western music.</p>
+
+        <h2>Simple ratios sound good to us</h2>
+
+        <p>Click to listen to these different combinations. If you come from a similar music culture to me, then one of these will sound sweet while the other two are ugly. The &lsquo;sweetness&rsquo; you&rsquo;re hearing is the 2:1 relationship:</p>
+
+        <div id="intervalWidget">
+          <img data-src="images/110 and 213hz.png" src="images/110 and 213hz_20.png" class="full lazy btn1 hand" alt="frequency graph of 110 and 213hz" />
+          <div class="sans center smaller hand btn1" style="color: #358c4b">&#x1F508; 252Hz and 130Hz (1.94:1)</div>
+
+          <img data-src="images/110 and 220hz.png" src="images/110 and 220hz_20.png" class="full lazy btn2 hand" alt="frequency graph of 110 and 220hz" />
+          <div class="sans center smaller hand btn2" style="color: #c94441">&#x1F508; 260Hz and 130Hz (2:1)</div>
+
+          <img data-src="images/110 and 227hz.png" src="images/110 and 227hz_20.png" class="full lazy btn3 hand" alt="frequency graph of 110 and 227hz" />
+          <div class="sans center smaller hand btn3" style="color: #6142a4">&#x1F508; 269Hz and 130Hz (2.07:1)</div>
+          <!-- I made these graphs with this cool online graphing calculator: https://www.desmos.com/calculator/cwc8bn4snj -->
+
+          <p>By a &ldquo;2:1&rdquo; relationship, I mean one note is twice in the same time it takes the other note to oscillate once. The two notes fit nicely together.</p>
+
+          <p>Here&rsquo;s some other ratios you can listen to. Let&rsquo;s play two notes together and notice which ones sound good to you:</p>
+          <button class="btn4 hand">&#x1F508; 2:1</button>
+          <button class="btn8 hand">&#x1F508; 5:3</button>
+          <button class="btn5 hand">&#x1F508; 3:2</button>
+          <button class="btn11 hand">&#x1F508; 4:2.78</button>
+          <button class="btn6 hand">&#x1F508; 4:3</button>
+          <button class="btn7 hand">&#x1F508; 5:4</button>
+          <button class="btn10 hand">&#x1F508; 81:73</button>
+          <button class="btn9 hand">&#x1F508; 18:17</button>
+
+          <p>Maybe it is not immediately obvious when you listen to these pitch combinations out of context, but the point is that most Western music is built around these simple frequency ratios, like 2:1, 3:2, 4:3, 5:4, etc. We tend to avoid the more complex ones like 81:73.</p>
+
+          <!-- Could introduce Lissajous visualisation here: https://yukos.securesite.jp/english/dhtml/htm/curve4.htm -->
+        </div>
+
+        <p>In Western music, the set of pitches we&rsquo;ve chosen is a compromise between pure mathematical principles, our subjective experience of sound (psychoacoustics), and the physical limitations of constructing musical instruments. Other cultures have chosen different pitch sets, which can sound jarring to Western ears.</p>
+
+        <p>So how do we get from these pure mathematical ratios to the notes we use in our music?</p>
+      </div>
+
+      <div class="swiper-slide" data-hash="octaves">
+        <h1>An octave is a 2:1 relationship</h1>
+        <p>When one note is twice the frequency of another, we say they have an <strong>octave</strong> relationship. The octave is the <em>distance</em> between the two pitches.</p>
+
+        <p>In my research, I found <a href="https://www.youtube.com/watch?v=Mfsnlbd-4xQ" target="_blank">this explanation from Chris Ford</a> very helpful: he said the two pitches in an octave relationship feel related in the same way that noon on Monday is related to noon on Tuesday. We recognise that they are different things but they have important characteristics in common.</p>
+
+        <h2>1 octave = 12 semitones</h2>
+        <p>In Western music, we start from the octave, and then break it down into 12 equally-sized pieces called <strong>semitones</strong>. The full set of 12 notes is the <strong>chromatic scale</strong>. When you take the 13th step, you&rsquo;re at the 1st note of the next octave.</p>
+
+        <img data-src="images/semitones in an octave.png" src="images/semitones in an octave_20.png" class="full lazy" alt="semitones in an octave" />
+
+        <p>It&rsquo;s crucial to understand that a semitone is a <em>distance</em> between two pitches, it&rsquo;s an <strong>interval</strong>, a relationship between two points in the space of all possible pitches.&nbsp;</p>
+
+        <div id="semitoneWidget" class="center">
+          <p class="sans smaller">&#x1F508; You can click on these buttons to hear each note:</p>
+           <button class="btn1">1</button>
+           <button class="btn2">2</button>
+           <button class="btn3">3</button>
+           <button class="btn4">4</button>
+           <button class="btn5">5</button>
+           <button class="btn6">6</button>
+           <button class="btn7">7</button>
+           <button class="btn8">8</button>
+           <button class="btn9">9</button>
+          <button class="btn10">10</button>
+          <button class="btn11">11</button>
+          <button class="btn12">12</button>
+          <button class="btn13">13</button>
+        </div>
+
+        <p>I was surprised to learn that the musical intervals we use don&rsquo;t line up perfectly with the mathematical ratios.</p>
+
+        <p>Next up, let&rsquo;s explore how these semitones and octaves and things show up in musical instruments...</p>
+      </div>
+
+      <div class="swiper-slide" data-hash="instruments">
+        <h1>Instruments are musical opinions</h1>
+        <p>Any instrument makes some musical options possible, at the exclusion of all the rest. Let&rsquo;s look at some stringed instruments for example.</p>
+        <img data-src="images/stringed instruments.png" class="full lazy" alt="stringed instruments" src="images/stringed instruments_20.png" />
+
+        <p>Stringed instruments are constructed around a fundamental physical concept: <strong>shorter strings make a higher pitch</strong>.</p>
+        <p>A harp has short high-pitched strings, and long low-pitched strings. A piano is like a harp with hammers attached: the keys at the high end strike short strings, and the low-pitch keys are hitting the longer strings. That&rsquo;s why a grand piano has its distinctive shape. On a guitar or a cello, we effectively reduce the length of the string by pressing it against the fingerboard.</p>
+
+        <h1>Guitars have a fret for each semitone</h1>
+        <p>Let&rsquo;s take a closer look at the guitar to see how the semitones and octaves work.</p>
+        <p>Say I have a guitar string that is held in tension so plucking it makes a pitch of 100Hz. If I make the string length half as long, the pitch will be 200Hz, and we&rsquo;ll hear the 2:1 octave relationship.</p>
+        <p>The <strong>fret</strong> for the first octave is halfway between the nut at the top and the bridge at the bottom of the string. If the scale length of the guitar is 22 inches, you can hear the first octave by playing the fret which is located 11 inches from the bridge (22 &divide; 2 = 11). That&rsquo;s the 2:1 relationship again.</p>
+        <p> If you want to hear the second octave, halve the string length again, down to 5.5 inches (11 &divide; 2 = 5.5).</p>
+
+        <img data-src="images/guitar lengths.png" class="full lazy" alt="guitar lengths" src="images/guitar lengths_20.png" />
+
+        <p>If you look more closely at the guitar diagram, you can count 12 frets from the &ldquo;nut&rdquo; up to the first octave: that&rsquo;s one fret per semitone.</p>
+        <h1>🤔 But wait a minute, why is it called an octave?&nbsp;</h1>
+        <p>&ldquo;Oct&rdquo; implies 8, but our octaves are divided into 12 notes!? Why the mismatch here? For me, this little puzzle is right at the heart of why Western music theory is hard to understand.</p>
+        <p>To get to the bottom of it, we have to consider the piano.</p>
+      </div>
+
+      <div class="swiper-slide" data-hash="piano-logic">
+        <h1>Pianos highlight the major scale</h1>
+        <p>It is rare to use all the 12 notes from the chromatic scale in a single piece of music. Usually we select a smaller subset to work with. Let's look at the <strong>major scale</strong> for example.</p>
+        <p>To build a major scale, you choose anywhere on the chromatic scale as your “root”, and then make a specific pattern, keeping some notes and skipping the others. I think of the pattern as “2212221”: that’s how many semitones I have to move to find each note.</p>
+
+        <table class="sans smallest bigscreenonly" id="chromatic">
+          <tr>
+          <td class="autowidth">Chromatic scale</td>
+          <td class="chromatic1">1</td>
+          <td class="chromatic2">2</td>
+          <td class="chromatic3">3</td>
+          <td class="chromatic4">4</td>
+          <td class="chromatic5">5</td>
+          <td class="chromatic6">6</td>
+          <td class="chromatic7">7</td>
+          <td class="chromatic8">8</td>
+          <td class="chromatic9">9</td>
+          <td class="chromatic10">10</td>
+          <td class="chromatic11">11</td>
+          <td class="chromatic12">12</td>
+          <td class="chromatic1">13/1</td>
+          </tr>
+          <tr> <td class="autowidth">Distance to the next</td> <td>2</td> <td>&nbsp;</td> <td>2</td> <td>&nbsp;</td> <td>1</td> <td>2</td> <td>&nbsp;</td> <td>2</td> <td>&nbsp;</td> <td>2</td> <td>&nbsp;</td> <td>1</td> <td>&nbsp;</td></tr>
+          <tr>
+          <td class="autowidth">Major scale</td>
+          <td class="chromatic1">1</td>
+          <td>skip</td>
+          <td class="chromatic3">2</td>
+          <td>skip</td>
+          <td class="chromatic5">3</td>
+          <td class="chromatic6">4</td>
+          <td>skip</td>
+          <td class="chromatic8">5</td>
+          <td>skip</td>
+          <td class="chromatic10">6</td>
+          <td>skip</td>
+          <td class="chromatic12">7</td>
+          <td class="chromatic1">8/1</td>
+          </tr>
+        </table>
+        <table class="sans smallest smallscreenonly" id="chromatic">
+          <tr><td colspan="13">The chromatic scale:</td></tr>
+          <tr>
+          <td class="chromatic1">1</td>
+          <td class="chromatic2">2</td>
+          <td class="chromatic3">3</td>
+          <td class="chromatic4">4</td>
+          <td class="chromatic5">5</td>
+          <td class="chromatic6">6</td>
+          <td class="chromatic7">7</td>
+          <td class="chromatic8">8</td>
+          <td class="chromatic9">9</td>
+          <td class="chromatic10">10</td>
+          <td class="chromatic11">11</td>
+          <td class="chromatic12">12</td>
+          <td class="chromatic1">13/1</td>
+          </tr>
+          <tr><td colspan="13">The major scale:</td></tr>
+          <tr>
+          <td class="chromatic1">1</td>
+          <td>&nbsp;</td>
+          <td class="chromatic3">2</td>
+          <td>&nbsp;</td>
+          <td class="chromatic5">3</td>
+          <td class="chromatic6">4</td>
+          <td>&nbsp;</td>
+          <td class="chromatic8">5</td>
+          <td>&nbsp;</td>
+          <td class="chromatic10">6</td>
+          <td>&nbsp;</td>
+          <td class="chromatic12">7</td>
+          <td class="chromatic1">8/1</td>
+          </tr>
+        </table>
+
+        <p>If you look at the top of a piano keyboard, counting both white and black keys, there&rsquo;s the familiar chromatic scale with all 12 notes. These 12 keys map directly across to the 12 frets on the guitar.</p>
+
+        <img data-src="images/keyboard - C.png" class="full lazy" alt="keyboard - C" src="images/keyboard - C_20.png" />
+
+        <p>Now look at the bottom and count just the white keys and you&rsquo;ll see a <strong>major scale</strong>, which has only 7 notes.</p>
+        <p>The &ldquo;6&rdquo; of the chromatic scale at the top is the same colour as the &ldquo;4&rdquo; of the major scale at the bottom, because they are the same pitch. They sound precisely the same, we just have different names for them depending on what counting system you use.</p>
+        <p>So this is why it is called an <strong>oct</strong>-ave: if we are only counting the white keys of the major scale, the 8th key is the octave of the 1st key.</p>
+        <p>This is one of the concepts that made music theory so confusing to me: to understand intervals, I need to use the 12-step chromatic scale. But the names we use for these intervals are derived from the 7-step major scale. So I have to use two counting systems simultaneously. That sucks! It&rsquo;s basically the same as asking &ldquo;how long does it take to drive 50 miles at 80 kilometers an hour?&rdquo; You can work it out if you have to, but it seems like an arcane and pointless puzzle if what you&rsquo;re trying to do is learn how to drive.</p>
+      </div>
+
+      <div class="swiper-slide" data-hash="intervals">
+        <h1>If you learn one thing, learn intervals</h1>
+        <p>So far I&rsquo;ve showed you two intervals: octaves and semitones. Remember, an interval is a relationship between two pitches. The octave is a 2:1 relationship between two notes, and the semitone is one twelfth of an octave. Here are the intervals you need to learn to understand how Western music is constructed:</p>
+        <ul class="sans smaller">
+          <li>1 semitone = Minor 2nd</li>
+          <li>2 semitones = Major 2nd</li>
+          <li>3 semitones = Minor 3rd</li>
+          <li>4 semitones = Major 3rd</li>
+          <li>5 semitones = Perfect 4th</li>
+          <li>6 semitones = Flattened 5th</li>
+          <li>7 semitones = Perfect 5th</li>
+          <li>8 semitones = Minor 6th</li>
+          <li>9 semitones = Major 6th</li>
+          <li>10 semitones = Minor 7th</li>
+          <li>11 semitones = Major 7th</li>
+          <li>12 semitones = Octave </li>
+        </ul>
+        <p>If you learned music with a guitar, like me, these names just feel intentionally confusing. You&rsquo;re telling me I can find a Perfect 5th by moving up 7 semitones. Why is that called a 5th instead of a 7th!?</p>
+
+        <img data-src="images/guitar 3 intervals.png" class="full lazy" alt="guitar 3 intervals" src="images/guitar 3 intervals_20.png" />
+
+        <p>It was only when I started learning about piano that I understood this weird naming system. From the perspective of a piano keyboard, the names make perfect sense: you can see in this diagram that the &ldquo;Major 3rd&rdquo; covers the distance of 3 white keys. The Perfect 5th covers 5 white keys.</p>
+
+        <img data-src="images/keyboard - all intervals.png" class="full lazy" alt="keyboard - all intervals" src="images/keyboard - all intervals_20.png" />
+
+        <p>Note: in this diagram I&rsquo;ve introduced the <strong>root</strong>; that&rsquo;s the lowest of the two notes in an interval. So counting with the major scale at the bottom of the keyboard, the root is on the 1 and the Perfect 5th is on the 5.</p>
+        <p>If you&rsquo;re learning music without a keyboard, I guess you just have to learn the intervals by rote, you have to remember there&rsquo;s 7 semitones in a Perfect 5th and 11 in a Major 7th, and so on. If you are going to learn one musical concept, get this one clear. Intervals are the Lego blocks of Western music; you can construct anything out of them.</p>
+
+        <h1>Pianos and guitars optimise for different things</h1>
+        <p>One nice thing about a guitar is that you can move an interval around and it will always be easy to find.</p>
+        <p>Once you know that there are 7 semitones in a Perfect 5th, you can start with your <strong>root</strong> on <strong>Fret 4</strong> and move up 7 frets to find the <strong>Perfect 5th</strong> on <strong>Fret 11</strong>. If you move the <strong>root</strong> to <strong>Fret 1</strong>, the <strong>Perfect 5th</strong> is easy to find on <strong>Fret 8</strong>.</p>
+
+        <img data-src="images/guitar 2 intervals.png" class="full lazy" alt="guitar 2 intervals" src="images/guitar 2 intervals_20.png" />
+
+        <p>In music terms this movement is called <strong>transposing.</strong> It&rsquo;s simple to transpose music on a guitar: move your hand two frets to the right and you&rsquo;ve transposed the tune two semitones up.</p>
+        <p>It&rsquo;s much more complicated on a piano. If I move the root a couple of steps to the right, the intervals go haywire!</p>
+
+        <img data-src="images/keyboard - all intervals transposed.png" class="full lazy" alt="keyboard - all intervals transposed" src="images/keyboard - all intervals transposed_20.png" />
+
+
+        <p>Before the transposition, all the major intervals were on the white keys. Now they&rsquo;re on the black keys.</p>
+        <p>If you&rsquo;re wondering what is happening here, you count the number of semitones using the chromatic scale at the top of the diagram. The Major 6th for instance is a distance of 9 semitones, so if the Root is on 1, the Major 6th is on 10.</p>
+        <p>Before transposing, the Major 6th interval landed on a white key, but now that I transposed the Root over a couple of steps, it lands on a black key.</p>
+        <p>I honestly don&rsquo;t know how pianists remember this! If you&rsquo;re confused, that&rsquo;s because the design choices of a piano keyboard make some parts of music theory straightforward, and other parts confusing. So at this point in my learning journey I started to wonder if I could invent new instruments that make music theory more intuitive...</p>
+      </div>
+
+      <div class="swiper-slide" data-hash="new-instrument">
+        <h1>Could a new instrument make music easier to learn?</h1>
+        <p>I like the straight line of the guitar, because it makes it easy to transpose, and I like the black and white of the piano because it helps me find the major intervals. Here&rsquo;s my first line of inquiry: what if we wrap the keyboard round into a circle?&nbsp;</p>
+
+        <img data-src="images/clock and keyboard.png" class="full lazy" alt="clock and keyboard" src="images/clock and keyboard_20.png" />
+
+        <p>In this new &ldquo;clock&rdquo; diagram I have kept the same pattern of 7 white notes and 5 black notes, but it starts at the top and proceeds clockwise, in contrast to the keyboard which starts at the left and proceeds to the right.</p>
+        <p>(In my research I found a bunch of other people who have taken a similar approach to visualising music, most notably <a href="https://fretboardknowledge.com/guitar/kb/allan-holdsworths-10-most-usable-scales/" target="_blank" rel="noopener">Allan Holdsworth</a>.)</p>
+        <p>With this imaginary clock-shaped instrument, I can visualise the intervals like arcs of the circle (and you can click to hear them):</p>
+
+        <div id="widget3">
+          <img data-src="images/circle keyboard - major 2nd.png" class="btn1 hand lazy left medium" alt="circle keyboard - major 2nd" src="images/circle keyboard - major 2nd_20.png" />
+          <img data-src="images/circle keyboard - major 3rd.png" class="btn2 hand lazy left medium" alt="circle keyboard - major 3rd" src="images/circle keyboard - major 3rd_20.png" />
+          <img data-src="images/circle keyboard - perfect 4th.png" class="btn3 hand lazy left medium lazy" alt="circle keyboard - perfect 4th" src="images/circle keyboard - perfect 4th_20.png" />
+          <img data-src="images/circle keyboard - perfect 5th.png" class="btn4 hand lazy left medium lazy" alt="circle keyboard - perfect 5th" src="images/circle keyboard - perfect 5th_20.png" />
+          <img data-src="images/circle keyboard - major 6th.png" class="btn5 hand lazy left medium" alt="circle keyboard - major 6th" src="images/circle keyboard - major 6th_20.png" />
+          <img data-src="images/circle keyboard - major 7th.png" class="btn6 hand lazy left medium" alt="circle keyboard - major 7th" src="images/circle keyboard - major 7th_20.png" />
+
+
+          <p>Using the clock layout, I think of the Major 6th as an interval of &ldquo;9 hours&rdquo;. I can move the Root to anywhere, and the Major 6th is still &ldquo;9 hours&rdquo; away, whether that&rsquo;s from 2 until 11 o&rsquo;clock, or 7 to 4 o&rsquo;clock.</p>
+
+          <img data-src="images/circle keyboard - major 6th.png" class="btn7 hand lazy left medium" alt="circle keyboard - major 6th" src="images/circle keyboard - major 6th_20.png" />
+          <img data-src="images/circle keyboard - major 6th rotated.png" class="btn8 hand lazy left medium" alt="circle keyboard - major 6th rotated" src="images/circle keyboard - major 6th rotated_20.png" />
+          <img data-src="images/circle keyboard - major 6th rotated again.png" class="btn9 hand lazy left medium" alt="circle keyboard - major 6th rotated again" src="images/circle keyboard - major 6th rotated again_20.png" />
+
+
+          <p class="clear">Let&rsquo;s see what happens if I try to explain some more music theory with these clock diagrams...</p>
+
+        </div>
+      </div>
+
+      <div class="swiper-slide" data-hash="chords">
+        <h1>Multiple pitches together make a chord</h1>
+        <p>The songs we play in the West are made of chord progressions. A <strong>chord</strong> is a combination of pitches played together simultaneously, and a <strong>progression</strong> is a sequence of chords.</p>
+        <p>There are many different possible chords, but you can go a long way with just a handful. The first two chords you generally learn are the <strong>major triad</strong> and the <strong>minor triad</strong> (usually referred to simply as major chords and minor chords). It&rsquo;s called a triad because it is made of 3 notes played together.</p>
+
+        <blockquote>A <strong>major triad chord </strong>is made of the Root, the Major 3rd, and the Perfect 5th.</blockquote>
+
+        <p>Let&rsquo;s see what a major chord looks like on the clock diagram. I&rsquo;ve labelled the Root (R), the Major 3rd interval (M3), and Perfect 5th interval (P5). Here is a variety of major chords, all the same shape, just rotated to different locations. Thinking in clock terms, the Major 3rd interval is always &ldquo;4 hours&rdquo; after the Root, and the Perfect 5th is &ldquo;7 hours&rdquo; after the root.</p>
+
+        <p class="center">👇 <em>Click to listen</em></p>
+
+        <div id="widget4">
+          <img data-src="images/circle - major chord.png" class="btn1 hand lazy left small" alt="circle - major chord" src="images/circle - major chord_20.png" />
+          <img data-src="images/circle - major chord rotated once more.png" class="btn2 hand lazy left small" alt="circle - major chord rotated once more" src="images/circle - major chord rotated once more_20.png" />
+          <img data-src="images/circle - major chord rotated.png" class="btn3 hand lazy left small" alt="circle - major chord rotated" src="images/circle - major chord rotated_20.png" />
+          <img data-src="images/circle - major chord rotated again.png" class="btn4 hand lazy left small" alt="circle - major chord rotated again" src="images/circle - major chord rotated again_20.png" />
+
+          <p class="clear" style="text-align: center;"><span style="font-weight: bold; font-style: italic;">4 different major chords</span></p>
+          <p>Now let&rsquo;s look at the minor chords.</p>
+
+          <blockquote>A <strong>minor triad chord</strong> is made of the Root, the Minor 3rd and the Perfect 5th.</blockquote>
+
+          <p>The minor chords look pretty similar to major chords, the only difference is that the Major 3rd interval (M3) is replaced with a Minor 3rd (m3).</p>
+
+          <img data-src="images/circle - minor chord.png" class="btn5 hand lazy left small" alt="circle - minor chord" src="images/circle - minor chord_20.png" />
+          <img data-src="images/circle - minor chord rotated once more.png" class="btn6 hand lazy left small" alt="circle - minor chord rotated once more" src="images/circle - minor chord rotated once more_20.png" />
+          <img data-src="images/circle - minor chord rotated.png" class="btn7 hand lazy left small" alt="circle - minor chord rotated" src="images/circle - minor chord rotated_20.png" />
+          <img data-src="images/circle - minor chord rotated again.png" class="btn8 hand lazy left small" alt="circle - minor chord rotated again" src="images/circle - minor chord rotated again_20.png" />
+
+          <p class="clear" style="text-align: center;"><span style="font-weight: bold; font-style: italic;">4 different minor chords</span></p>
+          <p>A lot of pop, rock and folk music is constructed from these two very simple, very common <strong>triad chord</strong> shapes (triad = 3 simultaneous pitches). Maybe you saw <a href="https://www.youtube.com/watch?v=oOlDewpCfZQ" target="_blank" rel="noopener">this viral music video</a> where they play 50 different hit pop songs all using the exact same sequence of chords.</p>
+          <div class='embed-container'><iframe class='lazy' data-src='https://www.youtube.com/embed/oOlDewpCfZQ' frameborder='0' modestbranding='1' allowfullscreen></iframe></div>
+
+          <p>This brings up a good question...</p>
+        </div>
+      </div>
+
+      <div class="swiper-slide" data-hash="pop-chords">
+        <h1>🤔 Why do some chords sound good together?</h1>
+        <p>I&rsquo;m going to explain the basics of chord theory, and hopefully like me, you will be surprised to learn how easy it is. I&rsquo;m going to make 7 chords starting from the 7 white keys of the piano.</p>
+        <p>Let&rsquo;s start with a triad, playing three pitches together.  I&rsquo;ll visualise it on the keyboard and the clock diagram (and you can click to listen).</p>
+        <div id="widget5">
+          <img data-src="images/keyboard clock - I chord.png" class="btn1 hand lazy full" alt="keyboard clock - I chord" src="images/keyboard clock - I chord_20.png" />
+
+          <p>We&rsquo;re playing two intervals here. If you look at the chromatic counting system at the top of the keyboard, you can count the semitones and work out that there are 4 semitones (5 - 1 = 4) in the first interval and 7 semitones in the other one (8 - 1 = 7). If you memorised the table of intervals, you know this is the Major 3rd (4 semitones) and the Perfect 5th (7 semitones).</p>
+          <p>We&rsquo;re playing a triad composed of the Root, the Major 3rd and the Perfect 5th: so this is a Major chord.</p>
+          <p>Musicians sometimes label chords with Roman numerals. Using the Roman numeral system, this is called the <strong>I </strong><strong>chord</strong>.</p>
+          <p>Now keeping the same finger spacing on the keyboard, we move over one step to the right to find the second chord.</p>
+          <img data-src="images/keyboard clock - ii chord.png" class="btn2 hand lazy full" alt="keyboard clock - ii chord" src="images/keyboard clock - ii chord_20.png" />
+
+          <p>Looking at the chromatic counting system at the top of the keyboard again, you can count the semitones and work out that there are 3 semitones (6 - 3 = 3) in the first interval and 7 semitones in the other one (10 - 3 = 7). If you know the table of intervals, you recognise this is the Minor 3rd (3 semitones) and the Perfect 5th (7 semitones).</p>
+          <p>So this chord is minor, because we&rsquo;re playing the Root, the Minor 3rd, and the Perfect 5th.&nbsp;</p>
+          <p>This is called the <strong>ii chord</strong> because it is II like 2 in Roman numerals, but it is in lower case because it&rsquo;s a minor chord.</p>
+          <p>If you keep your finger spacing the same and continue to move one step at a time, you get the <strong>iii</strong><strong> chord</strong>, then the <strong>IV</strong><strong> chord</strong>, the <strong>V</strong><strong> chord</strong>, and then the <strong>vi</strong><strong> chord</strong>.</p>
+          <img data-src="images/keyboard clock - iii chord.png" class="btn3 hand lazy full" alt="keyboard clock - iii chord" src="images/keyboard clock - iii chord_20.png" />
+          <img data-src="images/keyboard clock - IV chord.png" class="btn4 hand lazy full" alt="keyboard clock - IV chord" src="images/keyboard clock - IV chord_20.png" />
+          <img data-src="images/keyboard clock - V chord.png" class="btn5 hand lazy full" alt="keyboard clock - V chord" src="images/keyboard clock - V chord_20.png" />
+          <img data-src="images/keyboard clock - vi chord.png" class="btn6 hand lazy full" alt="keyboard clock - vi chord" src="images/keyboard clock - vi chord_20.png" />
+
+          <p>The seventh chord in the series is a bit different: the two intervals are a Minor 3rd (3 semitones) and a Flattened 5th (6 semitones). This one is called a "diminished" chord, indicated with a little &deg; symbol, like this: <strong>vii&deg; chord</strong>.</p>
+          <img data-src="images/keyboard clock - vii chord.png" class="btn7 hand lazy full" alt="keyboard clock - vii chord" src="images/keyboard clock - vii chord_20.png" />
+
+          <p>When I learned this I thought it was hilarious! You can find the 7 most common chords in the history of Western pop music by making a single shape with your hand and moving it along the keyboard 6 times.</p>
+          <p>All of those <a href="https://www.youtube.com/watch?v=oOlDewpCfZQ" target="_blank" rel="noopener">50 hit pop songs</a> use the same chord progression, from I to V to vi to IV, which you can hear by clicking here (click again to stop):</p>
+
+          <img id="chordChart" data-src="images/circle keyboard.png" class="btn8 hand lazy medium" alt="circle keyboard" src="images/circle keyboard_20.png" />
+
+          <p>One of the reasons those 50 songs all sound different is because they each have their own <strong>melody</strong>. You can think of the chord progression as the  &ldquo;background&rdquo; and the melody as the &ldquo;foreground&rdquo; of a song. In a way, the chords create the general mood, and the melody is the specific, memorable sequence of notes that makes the song memorable.</p>
+
+          <p>Here&rsquo;s the I, V, vi, IV chord progression again, but this time I've added a random melody. Each time you restart the song, it generates a new melody, by randomly choosing a few notes from the Major scale.</p>
+
+          <img id="chordChart2" data-src="images/circle keyboard.png" class="btn9 hand lazy medium" alt="circle keyboard" src="images/circle keyboard_20.png" />
+
+          <p>If you have understood this so far, congratulations because you can now write songs as well as The Beatles or Beyonc&eacute;! &#x1F602 </p>
+        </div>
+      </div>
+
+
+      <div class="swiper-slide" data-hash="modes">
+        <h1>Different modes make different moods</h1>
+        <p>In the previous example, we constructed a sequence of chords based on the Major scale. That scale has its own emotional flavour; I find it kinda cheesy. We can find different musical moods by switching <strong>modes</strong>.</p>
+        <p>Modern Western music has 7 modes, each with its own distinct flavour. All 7 modes use the same notes from the Major scale, in the same order, but we just change what note we start on:</p>
+        <img data-src="images/Ionian mode.png" class="lazy left small" alt="Ionian mode" src="images/Ionian mode_20.png" />
+        <img data-src="images/Dorian mode.png" class="lazy left small" alt="Dorian mode" src="images/Dorian mode_20.png" />
+        <img data-src="images/Phrygian mode.png" class="lazy left small" alt="Phrygian mode" src="images/Phrygian mode_20.png" />
+        <img data-src="images/Lydian mode.png" class="lazy left small" alt="Lydian mode" src="images/Lydian mode_20.png" />
+        <img data-src="images/Mixolydian mode.png" class="lazy left small" alt="Mixolydian mode" src="images/Mixolydian mode_20.png" />
+        <img data-src="images/Aeolian mode.png" class="lazy left small" alt="Aeolian mode" src="images/Aeolian mode_20.png" />
+        <img data-src="images/Locrian mode.png" class="lazy left small" alt="Locrian mode" src="images/Locrian mode_20.png" />
+
+        <p class="clear sans smaller">&#x1F4A1; Jake Lizzio is a fantastic guitar teacher on Youtube. He has an excellent couple of videos introducing modes: <a href="https://www.youtube.com/watch?v=bwaeBUYcO5o">this one on the emotional/tonal qualities of each mode</a> and <a href="https://www.youtube.com/watch?v=96cydVB4w-A">this one on how to practice them on a guitar</a>.</p>
+
+        <!-- <p class="clear">As the root (the start of the sequence) moves to a different point in the circle, all the intervals change. The Major scale (i.e. the Ionian mode) includes the Major 2nd, Major 3rd, Perfect 4th, Perfect 5th, Major 6th, and Major 7th. If we move the root forwards by two semitones, we're in the Dorian mode. These are the same 7 notes, but the intervals have changed. The Major 3rd and the Major 7th intervals have dropped one semitone: so they become the Minor 3rd and Minor 7th.</p> -->
+
+        <p class="clear">Modes have these cool Greek names, but they&rsquo;re hard to remember so we have more common names for a couple of them: we call the Ionian mode the Major scale, and the Aeolian mode the Minor scale.</p>
+
+        <p>Let&rsquo;s look into the Aeolian mode more closely. I'm going to build up the 7 triad chords of the Aeolian mode, just like I did with the Ionian mode (i.e. the Major scale) in the previous example. To get from the Ionian mode to the Aeolian mode, the Root is transposed up by a Major Sixth. So that puts the first chord here. It&rsquo;s minor, so we call it the <strong>i chord</strong>:</p>
+
+
+        <div id="modesWidget">
+          <img data-src="images/keyboard clock - i chord Aeolian.png" class="btn1 hand lazy full" alt="keyboard clock - i chord Aeolian" src="images/keyboard clock - i chord Aeolian_20.png" />
+
+          <p>Then I can build up the rest of the sequence just like last time, I just move up the keyboard playing triads:</p>
+
+          <img data-src="images/keyboard clock - ii chord Aeolian.png" class="btn2 hand lazy full" alt="keyboard clock - ii chord Aeolian" src="images/keyboard clock - ii chord Aeolian_20.png" />
+          <img data-src="images/keyboard clock - III chord Aeolian.png" class="btn3 hand lazy full" alt="keyboard clock - III chord Aeolian" src="images/keyboard clock - III chord Aeolian_20.png" />
+          <img data-src="images/keyboard clock - iv chord Aeolian.png" class="btn4 hand lazy full" alt="keyboard clock - iv chord Aeolian" src="images/keyboard clock - iv chord Aeolian_20.png" />
+          <img data-src="images/keyboard clock - v chord Aeolian.png" class="btn5 hand lazy full" alt="keyboard clock - v chord Aeolian" src="images/keyboard clock - v chord Aeolian_20.png" />
+          <img data-src="images/keyboard clock - VI chord Aeolian.png" class="btn6 hand lazy full" alt="keyboard clock - VI chord Aeolian" src="images/keyboard clock - VI chord Aeolian_20.png" />
+          <img data-src="images/keyboard clock - VII chord Aeolian.png" class="btn7 hand lazy full" alt="keyboard clock - VII chord Aeolian" src="images/keyboard clock - VII chord Aeolian_20.png" />
+
+          <p>I&rsquo;m curious to know what happens if we shift the I, V, vi, IV chord progression of the previous example into the Aeolian mode:</p>
+          <img id="chordChart3" data-src="images/circle keyboard.png" class="btn8 hand lazy medium" alt="circle keyboard" src="images/circle keyboard_20.png" />
+
+          <p>I&rsquo;ll add the random melody again too. Remember you can generate a new melody by starting and stopping (click on, click off):</p>
+
+          <img id="chordChart4" data-src="images/circle keyboard.png" class="btn9 hand lazy medium" alt="circle keyboard" src="images/circle keyboard_20.png" />
+        </div>
+
+        <p>Can you hear how the emotional/tonal/aesthetic quality of this mode is really distinct from the previous one?</p>
+
+
+      </div>
+
+      <div class="swiper-slide" data-hash="interesting-chords">
+        <h1>More interesting chords</h1>
+        <p>So far all the chords we&rsquo;ve used are triads composed of the Root, a Third, and a Fifth. Of course we can make many different chord shapes beyond these ones.</p>
+        <div id="widget6">
+          <p class="clear">For example, if we take a major chord and replace the Major 3rd with a Major 2nd: that&rsquo;s a <strong>suspended 2nd</strong> because you &ldquo;suspended&rdquo; the 3rd and replaced it with a 2nd.</p>
+
+          <img data-src="images/circle - major chord labelled.png" class="btn3 hand lazy left medium" alt="circle - major chord labelled" src="images/circle - major chord labelled_20.png" />
+          <img data-src="images/circle - suspended 2 chord labelled.png" class="btn4 hand lazy left medium" alt="circle - suspended 2 chord labelled" src="images/circle - suspended 2 chord labelled_20.png" />
+
+          <p class="clear">There&rsquo;s no need to be limited to triads, we can add more intervals and create more complex chords. For example it&rsquo;s common to hear &ldquo;seventh&rdquo; chords in blues music:</p>
+
+          <blockquote>A <strong>major seventh chord</strong> starts with a major chord and adds the Major 7th (M7).</blockquote>
+          <blockquote class="spacious">A <strong>dominant seventh chord</strong> starts with a major chord and adds the Minor 7th (m7).</blockquote>
+
+          <img data-src="images/circle - major chord labelled.png" class="btn5 hand lazy left medium" alt="circle - major chord labelled" src="images/circle - major chord labelled_20.png" />
+          <img data-src="images/circle - major seventh chord labelled.png" class="btn6 hand lazy left medium" alt="circle - major seventh chord labelled" src="images/circle - major seventh chord labelled_20.png" />
+          <img data-src="images/circle - dominant seventh chord labelled.png" class="btn7 hand lazy left medium" alt="circle - dominant seventh chord labelled" src="images/circle - dominant seventh chord labelled_20.png" />
+
+          <p class="clear">&nbsp;</p>
+          <blockquote class="spacious">A <strong>minor seventh chord</strong> starts with a minor chord and adds the Minor 7th.</blockquote>
+
+          <img data-src="images/circle - minor chord labelled.png" class="btn8 hand lazy left medium" alt="circle - minor chord labelled" src="images/circle - minor chord labelled_20.png" />
+          <img data-src="images/circle - minor seventh chord labelled.png" class="btn9 hand lazy left medium" alt="circle - minor seventh chord labelled" src="images/circle - minor seventh chord labelled_20.png" />
+
+          <p class="clear">Each of these different chord shapes has a distinctive emotional quality. Different genres of Western music are to some degree characterised by the types of chords they use.</p>
+        </div>
+      </div>
+
+      <div class="swiper-slide" data-hash="blues">
+        <h1>Blues music</h1>
+        <p>Maybe you&rsquo;ve heard of a &ldquo;12-bar blues&rdquo;. This refers to a very common chord progression at the heart of blues music. A basic 12-bar blues is built with I, IV, and V chords, like this:</p>
+        <table>
+          <tr><td>I</td><td>I</td><td>I</td><td>I</td></tr>
+          <tr><td>IV</td><td>IV</td><td>I</td><td>I</td></tr>
+          <tr><td>V</td><td>IV</td><td>I</td><td>I</td></tr>
+        </table>
+        <p>Here&rsquo;s a simple example from a guitar teacher on Youtube.&nbsp;</p>
+        <div class='embed-container'><iframe class='lazy' data-src='https://www.youtube.com/embed/2W5VzJKF6Y8?start=73' frameborder='0' allowfullscreen></iframe></div>
+
+        <p>For a more interesting example of a 12-bar blues, check out this performance of Sweet Home Chicago by Robert Johnson:<p>
+        <div class='embed-container'><iframe class='lazy' data-src='https://www.youtube.com/embed/O8hqGu-leFc' frameborder='0' allowfullscreen></iframe></div>
+
+        <p>He&rsquo;s following a slightly different sequence of I-IV-V chords:</p>
+
+        <table class="smaller">
+          <tr>
+            <td>I</td><td>IV</td><td>I</td><td>I</td>
+          </tr>
+          <tr class="sans">
+            <td>Oh</td><td>baby don't you want to</td><td colspan=2>go</td>
+          </tr>
+          <tr class="dbl">
+            <td>IV</td><td>IV</td><td>I</td><td>I</td>
+          </tr>
+          <tr class="sans">
+            <td>Oh</td><td>baby don't you want to</td><td colspan=2>go</td>
+          </tr>
+          <tr class="dbl">
+            <td>V</td><td>VI</td><td>I</td><td>V</td>
+          </tr>
+          <tr class="sans">
+            <td>Back to the land of California</td><td>to my sweet home</td><td colspan=2>Chicago</td>
+          </tr>
+        </table>
+
+        <p>One of the reasons Robert Johnson&rsquo;s blues sounds a lot more interesting than the guitar teacher&rsquo;s, is because he embellishes some of the basic IV and V chords with the seventh.</p>
+        <p>If you have an instrument, experiment with variations on the I-IV-V chord progression, try making them major or minor, or add in some seventh chords. Probably whatever you come up with will sound kinda bluesy.</p>
+
+        <h1>Jazz music</h1>
+        <div id="widget7">
+          <p>If you want to get more sophisticated, you can start exploring jazz music. For example, see this tutorial for the jazz standard &ldquo;Autumn Leaves&rdquo;.</p>
+          <div class='embed-container'><iframe class='lazy' data-src='https://www.youtube.com/embed/DDauV1Ot124?start=37' frameborder='0' allowfullscreen></iframe></div>
+
+          <p>It opens with a progression of seventh chords, then there&rsquo;s a <strong>half diminished chord</strong> which is a minor seventh chord where the 5th has been flattened.</p>
+
+          <img data-src="images/circle - minor seventh chord labelled.png" class="btn1 hand lazy left medium" alt="circle - minor seventh chord labelled" src="images/circle - minor seventh chord labelled_20.png" />
+          <img data-src="images/circle - half diminished chord labelled.png" class="btn2 hand lazy left medium" alt="circle - half diminished chord labelled" src="images/circle - half diminished chord labelled_20.png" />
+
+          <p class="clear">What makes jazz distinctive is the increasingly complex chords. At this point it starts to get a bit like algebra so you need plenty of cigarettes and whisky to make any progress.</p>
+        </div>
+      </div>
+
+      <div class="swiper-slide" data-hash="other-scales">
+        <p><em>From here on is just a rough draft, I will keep working on it...</em></p>
+
+        <h1>Other scales</h1>
+        <p>I showed you how to turn the Major scale into 7 different modes. There are loads of other scales too, each with their own unique pattern and distinctive tonality.</p>
+        <p>Here are some of the ones I use:</p>
+        <img data-src="images/Major.png" class="lazy left small" alt="Major" src="images/Major_20.png" />
+        <img data-src="images/Major pentatonic.png" class="lazy left small" alt="Major pentatonic" src="images/Major pentatonic_20.png" />
+        <img data-src="images/Natural minor.png" class="lazy left small" alt="Natural minor" src="images/Natural minor_20.png" />
+        <img data-src="images/Minor Pentatonic.png" class="lazy left small" alt="Minor Pentatonic" src="images/Minor Pentatonic_20.png" />
+        <img data-src="images/Blues.png" class="lazy left small" alt="Blues" src="images/Blues_20.png" />
+        <img data-src="images/Melodic minor.png" class="lazy left small" alt="Melodic minor" src="images/Melodic minor_20.png" />
+        <img data-src="images/Hungarian minor.png" class="lazy left small" alt="Hungarian minor" src="images/Hungarian minor_20.png" />
+
+        <p class="clear">If you're not super confident in your scales and intervals, it&rsquo;s always a safe bet to play a pentatonic scale.</p>
+        <p>If you're a guitarist you can visualise these scales on your fretboard with this sweet free app: <a href="https://fretastic.com/">Fretastic</a>. Notice it also includes backing tracks so you can learn these scales by playing musically, rather than just going up and down.</p>
+      </div>
+
+      <div class="swiper-slide" data-hash="tonnetz">
+        <h2 class="clear">The tonnetz</h1>
+        <p>Keyboards and fretboards are organised around semitones. But the most common intervals are Fifths and Thirds: what happens if we make a keyboard that is organised around these intervals, instead of semitones? This gives you a Tonnetz lattice,  first described by math genius Leonhard Euler in 1739, and beautifully <a href="https://imgur.com/a/aWIhR">explained here</a>.</p>
+        <img src="https://i.imgur.com/6axF7Oz.png" class="full" />
+
+        <p>With this layout, a major chord is always an upwards-pointing triangle, a minor chord is a downwards-pointing triangle. The minor seventh is down and two steps to the right.</p>
+        <img src="https://i.imgur.com/wVkTWDy.png" class="full" />
+
+        <p>This is maybe the most logical layout for making Western music, if you think in terms of intervals. Consider for example this song <em>Gymnopédie No. 1</em> by Erik Satie, shown here first on a Tonnetz lattice, and then on a piano with traditional sheet music notation. The Tonnetz makes the tonal relationships so much clearer than the keyboard:</p>
+
+        <div class='embed-container'><iframe class='lazy' data-src='https://www.youtube.com/embed/nidHgLA2UB0' frameborder='0' allowfullscreen></iframe></div>
+        <div class='embed-container'><iframe class='lazy' data-src='https://www.youtube.com/embed/2_321NFKkuU?start=10' frameborder='0' allowfullscreen></iframe></div>
+      </div>
+
+      <div class="swiper-slide" data-hash="glossary">
+        <h1>Glossary</h1>
+        <p><em>ideally whenever you come across one of these words in the text, you could click on it to remind you of the definition...</em></p>
+        <ul class="sans">
+          <li>Pitch</li>
+          <li>Frequency</li>
+          <li>Octave</li>
+          <li>Semitone</li>
+          <li>Chromatic scale</li>
+          <li>Intervals</li>
+          <li>major second = 2 semitones</li>
+          <li>minor third = 3 semitones</li>
+          <li>major third = 4 semitones</li>
+          <li>perfect fourth = 5 semitones</li>
+          <li>tritone = 6 semitones</li>
+          <li>perfect fifth = 7 semitones</li>
+          <li>minor sixth = 8 semitones</li>
+          <li>major sixth = 9 semitones</li>
+          <li>minor seventh = 10 semitones</li>
+          <li>major seventh = 11 semitones</li>
+          <li>Fret</li>
+          <li>Diatonic scale</li>
+        </ul>
+        <p>Notes &amp; Melodies</p>
+        <p>Chords</p>
+        <p>Music instruments change how we think about music</p>
+        <p>Guitars are good for transposing</p>
+        <p>Pianos are good for some scales</p>
+        <p>Tonnetz keyboard is maybe the most logical interface for all kinds of western music</p>
+        <h1>References</h1>
+        <p><a href="https://twitter.com/RichDecibels/status/1302858959435558912" target="_blank" rel="noopener">https://twitter.com/RichDecibels/status/1302858959435558912</a></p>
+        <p><a href="https://imgur.com/a/aWIhR" target="_blank" rel="noopener">https://imgur.com/a/aWIhR</a></p>
+        <p>Sidenote: if you&rsquo;ve ever seen a dulcimer, you may have noticed it has a diatonic fretboard. Maybe we should have dulcimers in school?</p>
+        <p>If you want to dive deep into the circle of fifths, <a href="https://www.youtube.com/watch?v=50CpDZvTWks" target="_blank" rel="noopener">this 20-minute lesson from Brian Kelly</a> is the best I&rsquo;ve seen.</p>
+      </div>
+
+    </div>
+    <div class="swiper-buttons">
+      <div class="swiper-button-prev">&lt; Previous page</div>
+      <div class="swiper-button-next">Next page &gt;</div>
+    </div>
+    <div class="swiper-pagination"></div>
+  </div>
+  <div id="disqus_thread"></div>
+
+  <script src="js/swiper-setup.js"></script>
+  <script type="text/javascript">
+
+    // lazy load images and youtube iframes
+    // requires lazyload.js
+    var lazyLoadInstance = new LazyLoad({});
+  </script>
+  <script src="js/sounds.js"></script>
+  <script src="js/disqus.js"></script>
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-20370254-1', 'auto');
+  ga('send', 'pageview');
+
+  </script>
+  </body>
+</html>

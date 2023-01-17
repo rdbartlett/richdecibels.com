@@ -1,0 +1,117 @@
+<!doctype html>
+<html>
+<head>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.7.52/Tone.js" integrity="sha512-IfuMOipT0Lmz/90cqRmceryNu+jH2m3wNE+KI44KBk/LPX3+OceXQ0oA3ZSMP+VZd7K0jterp2/8t70z7Ap2kg==" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css" integrity="sha512-NmLkDIU1C/C88wi324HBc+S2kLhi08PN5GDeUVVVC/BVt/9Izdsc9SVeVfA1UZbY3sHUlDSyRXhCzHfr6hmPPw==" crossorigin="anonymous" />
+</head>
+<body>
+
+
+  <div id="canvas1-container">
+    <canvas id="canvas1"></canvas>
+  </div>
+  <div id="canvas2-container">
+    <canvas id="canvas2"></canvas>
+  </div>
+
+
+  <button id='start'>
+    Load widget
+  </button>
+
+
+  <script>
+    let startBtn = $('#start')
+    startBtn[0].addEventListener('click', async () => {
+      await Tone.start()
+      console.log('audio is ready')
+      startBtn[0].style.display = 'none'
+
+      drawLinearChart()
+      drawLogChart()
+    })
+
+    var canvas1 = $("#canvas1")[0];
+    canvas1.width = 450;
+    canvas1.height = 100;
+    var ctx1 = canvas1.getContext("2d");
+
+    var canvas2 = $("#canvas2")[0];
+    canvas2.width = 450;
+    canvas2.height = 100;
+    var ctx2 = canvas2.getContext("2d");
+
+    canvas1.addEventListener('click', playLinearNote)
+    function playLinearNote(e){
+      console.log(Math.round(e.offsetX));
+      playNotes(Math.round(e.offsetX))
+    }
+
+    canvas2.addEventListener('click', ping2)
+    function ping2(e){
+      // math explained here: stackoverflow.com/questions/19472747/
+
+      var b = Math.log(400/50) / (400-50)
+      var a = 50 / Math.exp(b * 50)
+      // y = a exp bx
+
+      var logPosition =  Math.round(a * Math.exp(b * e.offsetX))
+
+      console.log(logPosition);
+      playNotes(logPosition)
+    }
+
+    function drawLinearChart(){
+      ctx1.beginPath();
+      ctx1.rect(50,0,50,50)
+      ctx1.rect(100,0,100,50)
+      ctx1.rect(200,0,200,50)
+      ctx1.stroke();
+      ctx1.fillText("Linear Chart", 200,65)
+      ctx1.fillText("50", 50,25)
+      ctx1.fillText("100", 100,25)
+      ctx1.fillText("200", 200,25)
+      ctx1.fillText("400", 400,25)
+    }
+
+    function drawLogChart(){
+      ctx2.beginPath();
+      ctx2.rect(50,0,350/3,50)
+      ctx2.rect(50+350/3,0,350/3,50)
+      ctx2.rect(50+700/3,0,350/3,50)
+      ctx2.stroke();
+      ctx2.fillText("Log Chart", 200,65)
+      ctx2.fillText("50", 50,25)
+      ctx2.fillText("100", 50+(350/3),25)
+      ctx2.fillText("200", 50+(700/3),25)
+      ctx2.fillText("400", 400,25)
+
+      ctx2.fillText("|", 50+350/3,45)
+      ctx2.fillText("|", 50+350/3+(1*350)/36,45)
+      ctx2.fillText("|", 50+350/3+(2*350)/36,45)
+      ctx2.fillText("|", 50+350/3+(3*350)/36,45)
+      ctx2.fillText("|", 50+350/3+(4*350)/36,45)
+      ctx2.fillText("|", 50+350/3+(5*350)/36,45)
+      ctx2.fillText("|", 50+350/3+(6*350)/36,45)
+      ctx2.fillText("|", 50+350/3+(7*350)/36,45)
+      ctx2.fillText("|", 50+350/3+(8*350)/36,45)
+      ctx2.fillText("|", 50+350/3+(9*350)/36,45)
+      ctx2.fillText("|", 50+350/3+(10*350)/36,45)
+      ctx2.fillText("|", 50+350/3+(11*350)/36,45)
+      ctx2.fillText("|", 50+350/3+(12*350)/36,45)
+    }
+
+    function playNotes (f1, f2) {
+      console.log(f1, f2)
+      synth = new Tone.PolySynth(Tone.Synth).toDestination();
+      const now = Tone.now()
+      synth.triggerAttack(f1, now)
+      synth.triggerRelease(f1, now+2)
+      synth.triggerAttack(f2, now+0.3)
+      synth.triggerRelease(f2, now+2)
+    }
+
+  </script>
+</body>
+</html>

@@ -1,0 +1,32 @@
+# On Leaving the Church of Social Justice
+## What You Can Do If You’re Sick of Call-Out Culture
+
+Lately I’ve been [reviewing my religious past](http://makeworld.io/episode/s01e04/), and noticing how it shows up in my present. This is an enormous topic, so I’m just going to slice off one piece, to tell you a story about accountability, social justice, and call-out culture.
+
+As a kid, I was indoctrinated by my church community. Indoctrination is easy: my little body was completely surrounded by people who reinforced the same set of beliefs. Everywhere I turned, I got the same story. I was praised for conforming to in-group norms, sanctioned for violating them, and ultimately threatened with annihilation if I rejected the wisdom of the church elders. Eventually I was excommunicated, not because I denied the Christian faith of my upbringing, but because I was _not willing to denounce_ all other faiths and non-faiths as wrong, evil and doomed. 
+
+After excommunication, I went looking for a new community of belonging. Eventually I found my way into the Wellington underground music scene. This plugged me into new set of norms, with preferences oriented towards DIY, mutual aid, and vaguely anarcha-feminist values. This punk energy propelled me into Occupy, and since then I’ve been lovingly entangled in a web of activists and social movements around the globe. 
+
+Throughout this path, I thought I was heading directly away from the church of my upbringing. The childhood trauma of  metaphysical blackmail (“do as we say or receive eternal suffering”) has been a foundational building block of my identity. That’s why, for instance, I’ve built a career out of out of bringing antiauthoritarian structures into the workplace.
+
+I’ve had many opportunities for self-reflection lately, and I’m starting to see how there’s a **subconscious** part of me that is incredibly eager to recreate the conditions of the past that I **consciously** think I’m running away from. A psychotherapist might call it [trauma reenactment](https://www.promises.com/blog/trauma-reenactment-can-run-ruin-lives/). 
+
+My reenactment shows up in a multitude of ways. One of the obvious ones is how I interact with “call-out culture”.
+
+A lot has been written about call-out culture. Here’s a typical exchange: Asam Ahmad [defines call-out culture](https://briarpatchmagazine.com/articles/view/a-note-on-call-out-culture) as “the tendency among progressives, radicals, activists, and community organizers to publicly name instances or patterns of oppressive behaviour and language use by others”. He then goes on to explain how it is often toxic, performative and counterproductive. Some time later, Hari Ziyad [responds](https://afropunk.com/2017/06/stop-attacking-call-out-culture-just-because-it-hurts-your-feelings-some-people-need-to-be-called-out/): “stop attacking ‘call-out culture’ just because it hurts your feelings. Some people need to be called out.”
+
+Now this is just a tiny sample of the complex and sometimes contradictory tangle of ideas and actions in the infinitely expansive field called “social justice activism”. There are a billion other things happening simultaneously in this field: someone is [organising prisoners for law reform](https://www.gofundme.com/f/ij3rdbirthday),  [workers are recuperating a factory](https://unicornriot.ninja/2019/occupy-resist-produce-inside-the-self-managed-factory-of-vio-me/), someone is [theorising about decentralised leadership](https://mediaforus.org/interviews/hardt), someone is [calling for a new nurturing masculinity](https://norasamaran.com/2016/02/11/the-opposite-of-rape-culture-is-nurturance-culture-2/). Despite these billions of data points to choose from, my brain, conditioned as it is, gets fixated on the parts of the field that remind me of church. Whenever I see someone being called out, I can’t help but see it through the lens of indoctrination, heresy and excommunication. When it’s me being [publicly criticised for doing feminism wrong](https://booksellersnz.wordpress.com/2016/03/12/better-together-with-richard-bartlett-and-nigel-dalton/), in my guts I react as if I’ve been threatened with the infinite suffering of eternity in Hell.
+
+Thankfully, I’m gaining some self-awareness. I’m starting to see how the Church of Social Justice only exists in my imagination. I’m renegotiating my relationship to call-out culture. I’m learning that excommunication only works if you believe in the authority of the excommunicator. 
+
+I believe that call-out culture is basically counterproductive, but it exists to compensate for a widespread lack of self-awareness and accountability in many parts of the social justice field. The solution is not to call-out call-out culture, but to invest in more effective methods for increasing self-awareness and accountability.
+
+The thing is, it’s _extremely unlikely_ that a harsh comment from somebody with no relationship to me is going to lead me down a path of growth and improvement. My growth and improvement is _almost always_ mediated through a trusting reciprocal relationship, even if it is just a friend knowing which book to recommend me.
+
+So I no longer seek my accountability from strangers. Instead, I have a network around me, people who have enthusiastically consented to support me in my growth. We are in relationship with each other, relationships of love, vulnerability and mutual care. We help each other see our biases, to see where we’ve been ignorant, inconsiderate or harmful. 
+
+Because I know I can count on these relationships, I don’t have to worry so much about what some stranger thinks about me. If some random internet user accuses me of saying something problematic, I don’t have to jump immediately to my standard reactions of shame, defensiveness, or counter-attack. I can press pause, and check in with the people who have pro-actively signed up for the work of holding up the mirror.
+
+It’s a new habit. I’m not done yet, but I’m practicing. My accountabilibuddies are standing with me while I learn.
+
+p.s. This story is published by Richard D. Bartlett with no rights reserved. [My website has extra file formats](http://richdecibels.com/stories/leaving-sj-church) for easy reproduction. You can [support my writing on Patreon](http://patreon.com/richdecibels).

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.7.52/Tone.js" integrity="sha512-IfuMOipT0Lmz/90cqRmceryNu+jH2m3wNE+KI44KBk/LPX3+OceXQ0oA3ZSMP+VZd7K0jterp2/8t70z7Ap2kg==" crossorigin="anonymous"></script>
+
+    <style type="text/css">
+      #instrumentCtr{
+        display: none;
+      }
+      input[type=number]{
+      width: 3em;
+      }
+    </style>
+  </head>
+  <body>
+    <div id='instrumentCtr'>
+      <form id="form1">
+        F1 =
+        <input type="number" value=140 id="F1" name="F1" step=10 >Hz
+
+        <br/>
+        F2 = F1 &times;
+        <input type="number" value=3 id="F2numerator">
+        &divide;
+        <input type="number" value=2 id="F2denominator">
+        = <span id="F2out"></span>Hz
+      </form>
+      <button id="play">Play</button>
+    </div>
+    <button id='start'>
+      Load widget
+    </button>
+
+    <script type="text/javascript">
+      //start audio context after user input
+      let startBtn = document.querySelector('#start')
+      startBtn.addEventListener('click', async () => {
+        await Tone.start()
+        console.log('audio is ready')
+        startBtn.style.display = 'none'
+        instrumentCtr.style.display = 'block'
+      })
+
+      form1 = document.querySelector('#form1')
+      F1 = form1["F1"]
+      F2n = form1["F2numerator"]
+      F2d = form1["F2denominator"]
+
+      F1.addEventListener('change', recalc)
+      F2n.addEventListener('change', recalc)
+      F2d.addEventListener('change', recalc)
+
+      play = document.querySelector('#play')
+
+      function recalc(){
+        Freq1 = F1.value
+        Freq2 = Freq1 * F2n.value / F2d.value
+        F2out = document.getElementById('F2out')
+        F2out.innerHTML = Freq2
+      }
+
+      function playnotes(){
+        synth = new Tone.PolySynth(Tone.Synth).toDestination();
+        const now = Tone.now()
+        synth.triggerAttack(Freq1, now)
+        synth.triggerRelease(Freq1, now+2)
+        synth.triggerAttack(Freq2, now+0.3)
+        synth.triggerRelease(Freq2, now+2)
+      }
+      play.addEventListener('click', playnotes)
+
+      recalc()
+      playnotes()
+    </script>
+  </body>
+</html>

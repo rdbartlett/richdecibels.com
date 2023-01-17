@@ -1,3 +1,10 @@
+body{
+  font-family: Roboto;
+  color: #2a1818;
+  background: #fadc6d;
+}
+a{ color: #417b83;}
+
 p, li{
   font-size: 120%;
 }
@@ -7,15 +14,8 @@ p, li{
 p.padded{
   margin-top: 1rem;
 }
-
-.emoji-list{
-  list-style: none;
-}
-
-.event-list{
-  background: #f1f1f1;
-  padding: 1em;
-  font-size: 90%;
+hr{
+  border-color: black;
 }
 
 img{
@@ -48,19 +48,3 @@ blockquote{
 blockquote p, p.small-p{
   font-size: 90%;
 }
-cite{
-  display: block;
-  margin-top: 0.5em;
-}
-.avatar{
-  width: 120px;
-  float: left;
-  margin-right: 1em;
-  border-radius: 120px;
-}
-.avatar.right{
-  float: right;
-  margin-left: 1em;
-}
-
-ul.upcoming{list-style: none;}

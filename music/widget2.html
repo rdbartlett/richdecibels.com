@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.7.52/Tone.js" integrity="sha512-IfuMOipT0Lmz/90cqRmceryNu+jH2m3wNE+KI44KBk/LPX3+OceXQ0oA3ZSMP+VZd7K0jterp2/8t70z7Ap2kg==" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css" integrity="sha512-NmLkDIU1C/C88wi324HBc+S2kLhi08PN5GDeUVVVC/BVt/9Izdsc9SVeVfA1UZbY3sHUlDSyRXhCzHfr6hmPPw==" crossorigin="anonymous" />
+    <style type="text/css">
+      body{
+      }
+      #instrumentCtr{
+        /*display: none;*/
+      }
+      #chart{
+        width:500px;
+        height: 500px;
+        background: #eee;
+      }
+      table{
+        width: 100%;  
+        height: 100%;
+      }
+      td{
+        border: 1px solid #ddd;
+        vertical-align: top;
+        text-align: right; 
+      }
+      .x0{
+        width: 10%;
+      }
+      .x1, .x2, .x3{ width: 30%; }
+      .y0{ height: 10%;}
+      .y1, .y2, .y3, {height: 30%;}
+    </style>
+  </head>
+  <body>
+    <div id='instrumentCtr'>
+      <div id="chart">
+        <table>
+          <tr>
+            <td class="x0 y3">400</td>
+            <td class="x1 y3">&nbsp;</td>
+            <td class="x2 y3">&nbsp;</td>
+            <td class="x3 y3">&nbsp;</td>
+          </tr>
+          <tr>
+            <td class="x0 y2">200</td>
+            <td class="x1 y2">&nbsp;</td>
+            <td class="x2 y2">&nbsp;</td>
+            <td class="x3 y2">&nbsp;</td>
+          </tr>
+          <tr>
+            <td class="x0 y1">100</td>
+            <td class="x1 y1">&nbsp;</td>
+            <td class="x2 y1">&nbsp;</td>
+            <td class="x3 y1">&nbsp;</td>
+          </tr>
+          <tr>
+            <td class="x0 y0">50</td>
+            <td class="x1 y0">100</td>
+            <td class="x2 y0">200</td>
+            <td class="x3 y0">400</td>
+          </tr>
+        </table>
+      </div>
+      <div id="position">
+      <div>
+    </div>
+    <button id='start'>
+      Load widget
+    </button>
+
+    <script type="text/javascript">
+      onmousemove = function(e){
+        console.log("mouse location: x", e.clientX, " y", e.clientY)
+        console.log("chart location: x", e.clientX, "y", 500 - e.clientY)
+      }
+
+
+
+      //start audio context after user input
+      let startBtn = document.querySelector('#start')
+      startBtn.addEventListener('click', async () => {
+        await Tone.start()
+        console.log('audio is ready')
+        startBtn.style.display = 'none'
+        instrumentCtr.style.display = 'block'
+      })
+
+      form1 = document.querySelector('#form1')
+      F1 = form1["F1"]
+      F2n = form1["F2numerator"]
+      F2d = form1["F2denominator"]
+
+      F1.addEventListener('change', recalc)
+      F2n.addEventListener('change', recalc)
+      F2d.addEventListener('change', recalc)
+
+      play = document.querySelector('#play')
+
+      function recalc(){
+        Freq1 = F1.value
+        Freq2 = Freq1 * F2n.value / F2d.value
+        F2out = document.getElementById('F2out')
+        F2out.innerHTML = Freq2
+      }
+
+      function playnotes(){
+        synth = new Tone.PolySynth(Tone.Synth).toDestination();
+        const now = Tone.now()
+        synth.triggerAttack(Freq1, now)
+        synth.triggerRelease(Freq1, now+2)
+        synth.triggerAttack(Freq2, now+0.3)
+        synth.triggerRelease(Freq2, now+2)
+      }
+      play.addEventListener('click', playnotes)
+
+      recalc()
+      playnotes()
+
+const seq = new Tone.Sequence((time, note) => {
+  synth.triggerAttackRelease(note, 0.1, time);
+}, ["C4", "G4", "F4", "A4"]).start(0);
+Tone.Transport.start();
+
+    </script>
+  </body>
+</html>

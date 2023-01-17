@@ -1,0 +1,56 @@
+==================================================================
+https://keybase.io/richdecibels
+--------------------------------------------------------------------
+
+I hereby claim:
+
+  * I am an admin of http://richdecibels.com
+  * I am richdecibels (https://keybase.io/richdecibels) on keybase.
+  * I have a public key ASDzqoKeGU1l9B0F6GyRrCSc6_fNef9t_0ZYMuKW363NIQo
+
+To do so, I am signing this object:
+
+{
+  "body": {
+    "key": {
+      "eldest_kid": "0120f3aa829e194d65f41d05e86c91ac249cebf7cd79ff6dff465832e296dfadcd210a",
+      "host": "keybase.io",
+      "kid": "0120f3aa829e194d65f41d05e86c91ac249cebf7cd79ff6dff465832e296dfadcd210a",
+      "uid": "10e0820d1ec08acab75dd7ef792acf19",
+      "username": "richdecibels"
+    },
+    "merkle_root": {
+      "ctime": 1574154305,
+      "hash": "a4e67ebdae9043d6a4084da2e98f98cac52e9b6fdb8639cb725ee71d6fe5cea2502abce499b69809b700f5b2738bc8a583ffa05db276949a6f806c07af0ec9e1",
+      "hash_meta": "70da59f2d3b8095417c92f9bc3dc1b83f61ed86ff4ea5aaff0fb9b2474ba79ca",
+      "seqno": 10170304
+    },
+    "service": {
+      "entropy": "+hC0Y5uWsHkYcBPswPfoCDEc",
+      "hostname": "richdecibels.com",
+      "protocol": "http:"
+    },
+    "type": "web_service_binding",
+    "version": 2
+  },
+  "client": {
+    "name": "keybase.io go client",
+    "version": "5.0.0"
+  },
+  "ctime": 1574154310,
+  "expire_in": 504576000,
+  "prev": "cadc6e8f1c0ec983c3ce602afa0f9e48f3abdcd2183d0719c77e3562f2b83bbf",
+  "seqno": 21,
+  "tag": "signature"
+}
+
+which yields the signature:
+
+hKRib2R5hqhkZXRhY2hlZMOpaGFzaF90eXBlCqNrZXnEIwEg86qCnhlNZfQdBehskawknOv3zXn/bf9GWDLilt+tzSEKp3BheWxvYWTESpcCFcQgytxujxwOyYPDzmAq+g+eSPOr3NIYPQcZx341YvK4O7/EIDteGyK4d+W6D14jFk8ESNlLS8VB0rm5PIj/FEabrd55AgHCo3NpZ8RAAIoW1UxgnjyR2umVniozsu4DD6ps6jdypu3gsVpOzBFTXwMlvaTakoCdOt3TgOYe8+hupM3DVXXRn1YtSas0BqhzaWdfdHlwZSCkaGFzaIKkdHlwZQildmFsdWXEIM38RknssL+cx3hGgN2jmQzvFa00AWipTdFTOdmQie9oo3RhZ80CAqd2ZXJzaW9uAQ==
+
+And finally, I am proving ownership of this host by posting or
+appending to this document.
+
+View my publicly-auditable identity here: https://keybase.io/richdecibels
+
+==================================================================

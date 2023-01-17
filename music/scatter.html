@@ -1,0 +1,152 @@
+<!doctype html>
+<html>
+
+<head>
+	<title>Scatter Chart</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js" integrity="sha512-s+xg36jbIujB2S2VKfpGmlC3T5V2TF3lY48DX7u2r9XzGzgPsa6wTpOQA7J9iffvdeBN0q9tKzRxVxw1JviZPg==" crossorigin="anonymous"></script>
+
+	<style>
+	canvas {
+		-moz-user-select: none;
+		-webkit-user-select: none;
+		-ms-user-select: none;
+	}
+	</style>
+</head>
+
+<body>
+	<div style="width:400px; height:600px">
+		<canvas id="canvas"></canvas>
+	</div>
+	<script>
+	var color = Chart.helpers.color;
+	var scatterChartData = {
+		datasets: [{
+			borderColor: 'red',
+			backgroundColor: color('red').alpha(0.5).rgbString(),
+			data: [{
+				x: 50,
+				y: 50,
+			}, {
+				x: 100,
+				y: 100,
+			}, {
+				x: 200,
+				y: 200,
+			}, {
+				x: 400,
+				y: 400,
+			}, {
+				x: 800,
+				y: 800,
+			}, {
+				x: 1600,
+				y: 1600,
+			}]
+		}]
+	};
+
+	window.onload = function() {
+		var canvas = document.getElementById('canvas');
+		var ctx = canvas.getContext('2d');
+		// canvas.addEventListener('click', chartClicked);
+
+    function chartClicked(e){
+	    var yTop = this.chart.chartArea.top;
+	    var yBottom = this.chart.chartArea.bottom;
+
+	    var yMin = this.chart.scales['y-axis-0'].min;
+	    var yMax = this.chart.scales['y-axis-0'].max;
+	    var newY = 0;
+
+	    if (event.offsetY <= yBottom && event.offsetY >= yTop) {
+	        newY = Math.abs((event.offsetY - yTop) / (yBottom - yTop));
+	        newY = (newY - 1) * -1;
+	        newY = newY * (Math.abs(yMax - yMin)) + yMin;
+	    };
+
+	    var xTop = this.chart.chartArea.left;
+	    var xBottom = this.chart.chartArea.right;
+	    var xMin = this.chart.scales['x-axis-0'].min;
+	    var xMax = this.chart.scales['x-axis-0'].max;
+	    var newX = 0;
+
+	    if (event.offsetX <= xBottom && event.offsetX >= xTop) {
+	        newX = Math.abs((event.offsetX - xTop) / (xBottom - xTop));
+	        newX = newX * (Math.abs(xMax - xMin)) + xMin;
+	    };
+
+	    console.log(newX, newY);
+
+    }
+
+		var Charts = new Chart.Scatter(ctx, {
+			data: scatterChartData,
+			options: {
+				legend: {
+					display: false
+				},
+				title: {
+					display: true,
+					text: 'Chart.js Scatter Chart - Logarithmic X-Axis'
+				},
+				scales: {
+					xAxes: [{
+						type: 'logarithmic',
+						ticks: {
+							userCallback: function(tick) {
+								var remain = tick / (Math.pow(10, Math.floor(Chart.helpers.log10(tick))));
+								if (remain === 1 || remain === 2 || remain === 5) {
+									return tick.toString() + 'Hz';
+								}
+								return '';
+							},
+						},
+						scaleLabel: {
+							labelString: 'Frequency 1',
+							display: true,
+						}
+					}],
+					yAxes: [{
+						type: 'logarithmic',
+						ticks: {
+							userCallback: function(tick) {
+								var remain = tick / (Math.pow(10, Math.floor(Chart.helpers.log10(tick))));
+								if (remain === 1 || remain === 2 || remain === 5) {
+									return tick.toString() + 'Hz';
+								}
+								return '';
+							},
+						},
+						scaleLabel: {
+							labelString: 'Frequency 2',
+							display: true
+						}
+					}]
+				}
+			}
+		});
+		canvas.addEventListener('click', whereAmI);
+		function ping(e){
+		  console.log(e.offsetX + "," + e.offsetY);
+		}
+		function whereAmI(evt){
+		  var activePoints = Charts.getElementsAtEvent(evt);
+		  var firstPoint = activePoints[0];
+		  // console.log(activePoints)
+		  if(firstPoint !== undefined){
+		    var label = Charts.data.labels[firstPoint._index];
+		    var value = Charts.data.datasets[firstPoint._datasetIndex].data[firstPoint._index];
+
+		    console.log(label + ": " + value.x);
+		    console.log(label + ": " + value.y);
+		  }
+		};
+
+	};
+
+
+	</script>
+</body>
+
+</html>

@@ -1,0 +1,128 @@
+<!doctype html>
+<html>
+<head>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.7.52/Tone.js" integrity="sha512-IfuMOipT0Lmz/90cqRmceryNu+jH2m3wNE+KI44KBk/LPX3+OceXQ0oA3ZSMP+VZd7K0jterp2/8t70z7Ap2kg==" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css" integrity="sha512-NmLkDIU1C/C88wi324HBc+S2kLhi08PN5GDeUVVVC/BVt/9Izdsc9SVeVfA1UZbY3sHUlDSyRXhCzHfr6hmPPw==" crossorigin="anonymous" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js" integrity="sha512-s+xg36jbIujB2S2VKfpGmlC3T5V2TF3lY48DX7u2r9XzGzgPsa6wTpOQA7J9iffvdeBN0q9tKzRxVxw1JviZPg==" crossorigin="anonymous"></script>
+</head>
+<body>
+    <button id='start'>
+      Load widget
+    </button>
+
+
+  <div class="chart-container" style="position: relative; height:40vh; width:80vw;">
+    <canvas id="graph_1" ></canvas>
+  </div>
+  <div id="graph_coords"></div>
+
+
+  <script>
+    let startBtn = $('#start')
+    startBtn[0].addEventListener('click', async () => {
+      await Tone.start()
+      console.log('audio is ready')
+      startBtn[0].style.display = 'none'
+
+      drawChart()
+    })
+
+    function drawChart(){
+      var ctx = $("#graph_1");
+      var dataArray =  [ {x:50,y:50},{x:100,y:100},{x:200,y:200} ];
+      var myChart = new Chart(ctx, {
+        type: 'scatter',
+        data: {
+          datasets: [{
+            label: "test",
+            fill: false,
+            data: dataArray
+          }]
+        },
+        options: {
+          title: {
+            display: true,
+            text: 'Test Graph'
+          },
+          legend: {
+            display: false
+          },
+          animation: {
+            duration: 0,
+          }, // general animation time
+          hover: {
+            animationDuration: 0,
+          }, // duration of animations when hovering an item
+          responsiveAnimationDuration: 0, // animation duration after a resize
+          scales: {
+            xAxes: [{
+              display: true,
+              scaleLabel: {
+                display: true,
+                labelString: 'first tone (Hz)'
+              }
+            }],
+            yAxes: [{
+              display: true,
+              scaleLabel: {
+                display: true,
+                labelString: 'second tone (Hz)'
+              }
+            }]
+          },
+          tooltips: {
+            mode: 'index',
+            intersect: false,
+            footerFontStyle: 'normal'
+          },
+        }
+
+      });
+
+      ctx.click(function(evt) {
+        //console.log(evt.offsetX + "," + evt.offsetY);
+        var ytop = myChart.chartArea.top;
+        var ybottom = myChart.chartArea.bottom;
+        var ymin = myChart.scales['y-axis-1'].min;
+        var ymax = myChart.scales['y-axis-1'].max;
+        var newy = '';
+        var showstuff = 0;
+        if (evt.offsetY <= ybottom && evt.offsetY >= ytop) {
+          newy = Math.abs((evt.offsetY - ytop) / (ybottom - ytop));
+          newy = (newy - 1) * -1;
+          newy = newy * (Math.abs(ymax - ymin)) + ymin;
+          showstuff = 1;
+        }
+        var xtop = myChart.chartArea.left;
+        var xbottom = myChart.chartArea.right;
+        var xmin = myChart.scales['x-axis-1'].min;
+        var xmax = myChart.scales['x-axis-1'].max;
+        var newx = '';
+        if (evt.offsetX <= xbottom && evt.offsetX >= xtop && showstuff == 1) {
+          newx = Math.abs((evt.offsetX - xtop) / (xbottom - xtop));
+          newx = newx * (Math.abs(xmax - xmin)) + xmin;
+        }
+        if (newy != '' && newx != '') {
+          //console.log(newx + ',' + newy);
+          // $("#graph_coords").html('Mouse Coordinates: ' + newx.toFixed(2) + ',' + newy.toFixed(2));
+        }
+
+        playNotes(newx.toFixed(2), newy.toFixed(2))
+      });
+    }
+
+    function playNotes (f1, f2) {
+      console.log(f1, f2)
+      synth = new Tone.PolySynth(Tone.Synth).toDestination();
+      const now = Tone.now()
+      synth.triggerAttack(f1, now)
+      synth.triggerRelease(f1, now+2)
+      synth.triggerAttack(f2, now+0.3)
+      synth.triggerRelease(f2, now+2)
+    }
+
+  </script>
+</body>
+</html>
